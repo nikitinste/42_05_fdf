@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/18 16:22:37 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/18 19:19:58 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,21 @@ static int	deal_key(int key, void *prm)
 		exit (0);
 	}
 	if (key == 126)
-		x->b->y -= 15;
+		x->b->y -= 5;
 	if (key == 125)
-		x->b->y += 15;
+		x->b->y += 5;
 	if (key == 124)
-		x->b->x += 15;
+		x->b->x += 5;
 	if (key == 123)
-		x->b->x -= 15;
+		x->b->x -= 5;
 	if (key == 13)
-		x->a->y -= 15;
+		x->a->y -= 5;
 	if (key == 1)
-		x->a->y += 15;
+		x->a->y += 5;
 	if (key == 2)
-		x->a->x += 15;
+		x->a->x += 5;
 	if (key == 0)
-		x->a->x -= 15;
+		x->a->x -= 5;
 	clear_window(x->img, x->win);
 	put_line_to_img(*x->img, *x->a, *x->b);
 	mlx_put_image_to_window (x->mlx_ptr, x->win_ptr, x->img_ptr, 0, 0);
@@ -101,16 +101,16 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	ft_putnbr(img.ndn);
 	ft_putchar('\n');
 	//
-	a.x = 0;
-	a.y = 0;
-	a.color = 0xFF0000;
-	b.x = win.x;
-	b.y = win.y;
+	a.x = 50;
+	a.y = 50;
+	a.color = 0x00FF00;
+	b.x = 0;
+	b.y = 0;
 	x.a = &a;
 	x.b = &b;
 	x.win = &win;
 	x.img = &img;
-	b.color = 0x00FF00;
+	b.color = 0xFF0000;
 	img.win = &win;
 	put_line_to_img(img, a, b);
 	//print_image(img, win);

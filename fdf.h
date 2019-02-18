@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/18 15:40:40 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/18 18:34:59 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ typedef struct	s_line_prm
 	int				d_big;
 	int				d_small;
 	int				i;
+	int				d_ind;
+	int				sign;
 }				t_line_prm;
 
 int		error_msg(char *message);
