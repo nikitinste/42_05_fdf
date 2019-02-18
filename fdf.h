@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/07 21:26:12 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/15 18:24:21 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include "minilibx/mlx.h"
 # include "libft/libft.h"
 # define BUF a->buf_str[a->buf_i]
+# define WIN_X 0
+# define WIN_Y 0
 
 typedef struct	s_make_arr
 {
@@ -35,10 +38,89 @@ typedef struct	s_map_prm
 	int		y;
 }				t_map_prm;
 
+/* window params: win */
+
+typedef struct	s_win_prm
+{
+	int		x;
+	int		y;
+	char	*name;
+}				t_win_prm;
+
+/* img */
+
+typedef struct	s_img_data
+{
+	char	*addr;
+	int		bpp;
+	int		lsz;
+	int		ndn;
+}				t_img_data;
+
+/* Current dot params: a b */
+
+typedef struct	s_pix_prm
+{
+	int		x;
+	int		y;
+	int		color;
+}				t_pix_prm;
+
+/* x */
+
+typedef struct	s_mlx_prms
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	t_pix_prm	*a;
+	t_pix_prm	*b;
+	t_win_prm	*win;
+	t_img_data	*img;
+}				t_mlx_prms;
+
+/* Input grad params: clr */
+
+typedef struct	s_grad_prms
+{
+	int		delta;
+	int		a;
+	int		b;
+}				t_grad_prms;
+
+/* Operational grad params: grad */
+
+typedef struct	s_grad
+{
+	unsigned char	*a;
+	unsigned char	*b;
+	unsigned char	*c;
+	int				d1;
+	int				d2;
+	int				d3;
+	int				color;
+}				t_grad;
+
+/* Operational build line params: l */
+
+typedef struct	s_line_prm
+{
+	int			dx;
+	int			dy;
+	int			d_big;
+	int			d_small;
+	int			i;
+}				t_line_prm;
+
 int		error_msg(char *message);
 int		col_count(char ***row);
 int 	free_arr(int ***map, int ***color, t_make_arr *a, int err);
 int		get_zeromap(t_make_arr *a, int ***map);
-void	window_control(int ***map, int ***color, t_map_prm m);
+int		window_control(int ***map, int ***color, t_map_prm m, char *name);
 int		get_color(char *str);
+void	put_pix_to_img(t_img_data img, int x, int y, int color);
+void	put_line_to_img(t_img_data img, t_pix_prm a, t_pix_prm b);
+void	print_image(t_img_data img, t_win_prm win);
+//
+void	print_maps(int ***map, int ***color, t_map_prm m);//! Убрать это потом!!
 #endif

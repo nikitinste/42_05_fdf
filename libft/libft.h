@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uhand <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 13:50:48 by uhand             #+#    #+#             */
-/*   Updated: 2018/12/03 13:50:56 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/13 17:54:44 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,5 @@ void			ft_lstdelfirst(t_list **alst, void (*del)(void *, \
 	size_t));
 int				get_next_line(const int fd, char **line);
 int				ft_lstcount(t_list	*addr);
+int				ft_abs(int nbr);
 #endif

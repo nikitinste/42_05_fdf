@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:57 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/09 00:22:04 by stepa            ###   ########.fr       */
+/*   Updated: 2019/02/12 15:05:37 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ static int	make_arr(t_list *list, int ***map, int ***color, t_map_prm *m)
 	t_make_arr	a;
 
 	a.row_count = ft_lstcount(list);
-	/*if(!(map[0] = (int**)malloc(sizeof(int*) * a.row_count)))
-		return (error_msg("Memory allocation error."));*/
 	a.buf_str = ft_strsplit(list->content, ' ');
 	a.col_cnt_prev = col_count(&(a.buf_str));
 	a.col_count = a.col_cnt_prev;
@@ -124,6 +122,5 @@ int			main(int argc, char **argv)
 		return (error_msg("Invalid map."));
 	}
 	ft_lstdel(&list, &ft_lstfree);
-	window_control(&map, &color, m);
-	return (0);
+	return (window_control(&map, &color, m, argv[1]));
 }

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:12:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/11 16:15:46 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/14 18:16:58 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	print_maps(int ***map, int ***color, t_map_prm m)
 		{
 			ft_putnbr(map[0][x][y]);
 			ft_putchar(' ');
-			/*if (map[0][x][y] < 10)
-				ft_putchar(' ');*/
+			if (map[0][x][y] < 10)
+				ft_putchar(' ');
 			y++;
 		}
 		ft_putchar('\n');
@@ -49,5 +49,27 @@ void	print_maps(int ***map, int ***color, t_map_prm m)
 			y = 0;
 			x++;
 		}
+	}
+}
+
+void	print_image(t_img_data img, t_win_prm win)
+{
+	char	*img_str;
+	int		line;
+	int		i;
+
+	img_str = (char*)img.addr;
+	line = 0;
+	while (line < (win.y * img.lsz))
+	{
+		i = 0;
+		while (i < img.lsz)
+		{
+			img_str[line] = (char)120;
+			ft_putnbr((int)img_str[line]);
+			i++;
+			line++;
+		}
+		ft_putchar('\n');
 	}
 }
