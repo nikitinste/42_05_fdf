@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:18:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/15 16:57:35 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/18 16:22:45 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void			put_pix_to_img(t_img_data img, int x, int y, int color)
 {
 	int	*image;
 
+	if (x < 0 || y < 0 || x >= img.win->x || y >= img.win->y)
+		return ;
 	image = (int*)img.addr;
 	image[(y * (img.lsz / 4)) + x] = color;
 }

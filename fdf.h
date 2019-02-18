@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/15 18:24:21 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/18 15:40:40 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,68 +24,69 @@
 
 typedef struct	s_make_arr
 {
-	char	**buf_str;
-	int		row_count;
-	int		col_count;
-	int		col_cnt_prev;
-	int		row_i;
-	int		buf_i;
+	char			**buf_str;
+	int				row_count;
+	int				col_count;
+	int				col_cnt_prev;
+	int				row_i;
+	int				buf_i;
 }				t_make_arr;
 
 typedef struct	s_map_prm
 {
-	int		x;
-	int		y;
+	int				x;
+	int				y;
 }				t_map_prm;
 
 /* window params: win */
 
 typedef struct	s_win_prm
 {
-	int		x;
-	int		y;
-	char	*name;
+	int				x;
+	int				y;
+	char			*name;
 }				t_win_prm;
 
 /* img */
 
 typedef struct	s_img_data
 {
-	char	*addr;
-	int		bpp;
-	int		lsz;
-	int		ndn;
+	char			*addr;
+	int				bpp;
+	int				lsz;
+	int				ndn;
+	t_win_prm		*win;
 }				t_img_data;
 
 /* Current dot params: a b */
 
 typedef struct	s_pix_prm
 {
-	int		x;
-	int		y;
-	int		color;
+	int				x;
+	int				y;
+	int				color;
 }				t_pix_prm;
 
 /* x */
 
 typedef struct	s_mlx_prms
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	t_pix_prm	*a;
-	t_pix_prm	*b;
-	t_win_prm	*win;
-	t_img_data	*img;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	t_pix_prm		*a;
+	t_pix_prm		*b;
+	t_win_prm		*win;
+	t_img_data		*img;
 }				t_mlx_prms;
 
 /* Input grad params: clr */
 
 typedef struct	s_grad_prms
 {
-	int		delta;
-	int		a;
-	int		b;
+	int				delta;
+	int				a;
+	int				b;
 }				t_grad_prms;
 
 /* Operational grad params: grad */
@@ -105,11 +106,11 @@ typedef struct	s_grad
 
 typedef struct	s_line_prm
 {
-	int			dx;
-	int			dy;
-	int			d_big;
-	int			d_small;
-	int			i;
+	int				dx;
+	int				dy;
+	int				d_big;
+	int				d_small;
+	int				i;
 }				t_line_prm;
 
 int		error_msg(char *message);

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/15 20:26:15 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/18 16:22:37 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,8 @@ static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
 static int	deal_key(int key, void *prm)
 {
 	t_mlx_prms	*x;
-	static int	i;
 
 	x = (t_mlx_prms*)prm;
-	if (i < 1)
-		i = 2;
 	if (key == 53)
 	{
 		ft_putnbr(key);
@@ -59,15 +56,9 @@ static int	deal_key(int key, void *prm)
 	if (key == 125)
 		x->b->y += 15;
 	if (key == 124)
-	{
-		x->b->x += i;
-		i = ((i * 5) / 3);
-	}
+		x->b->x += 15;
 	if (key == 123)
-	{
-		x->b->x -= i;
-		i /= 2;
-	}
+		x->b->x -= 15;
 	if (key == 13)
 		x->a->y -= 15;
 	if (key == 1)
@@ -120,6 +111,7 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	x.win = &win;
 	x.img = &img;
 	b.color = 0x00FF00;
+	img.win = &win;
 	put_line_to_img(img, a, b);
 	//print_image(img, win);
 	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);
