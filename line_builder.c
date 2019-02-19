@@ -6,20 +6,20 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:18:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/19 13:53:55 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/19 19:37:04 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "fdf.h"
 
-void			put_pix_to_img(t_img_data img, int x, int y, int color)
+void			put_pix_to_img(t_line_prm *l, int x, int y, int color)
 {
 	int	*image;
 
-	if (x < 0 || y < 0 || x >= img.win->x || y >= img.win->y)
+	if (x < 0 || y < 0 || x >= l->img->win->x || y >= l->img->win->y)
 		return ;
-	image = (int*)img.addr;
-	image[(y * (img.lsz / 4)) + x] = color;
+	image = (int*)l->img->addr;
+	image[(y * (l->img->lsz / 4)) + x] = color;
 	//print_color(color);
 }
 
@@ -88,24 +88,30 @@ static int		get_coord(t_line_prm *l)
 	return (coord);
 }
 
-void			put_line_to_img(t_img_data img, t_pix_prm a, t_pix_prm b)
+void			put_line_to_img(t_img_data *img, t_pix_prm a, t_pix_prm b)
 {
 	t_line_prm		l;
 	t_grad_prms		clr;
+	void			(*method)(t_line_prm*, int, int, int);
 
+	if (img->woo_prm == 0)
+		method = &put_pix_to_img;
+	if (img->woo_prm == 1)
+		method = &put_woo_to_img;
 	get_delta(&a, &b, &l);
 	clr.delta = ft_abs(l.d_big);
 	clr.a = a.color;
 	clr.b = b.color;
 	l.i = 0;
+	l.img = img;
 	while (l.i <= ft_abs(l.d_big))
 	{
 		if (l.d_ind == 1)
-			put_pix_to_img(img, (a.x + (l.i * l.sign)), (a.y + get_coord(&l)), \
-				get_grad_color(&img, &clr, l.i));
+			method(&l, (a.x + (l.i * l.sign)), (a.y + get_coord(&l)), \
+				get_grad_color(img, &clr, l.i));
 		else
-			put_pix_to_img(img, (a.x + get_coord(&l)), (a.y + (l.i * l.sign)), \
-				get_grad_color(&img, &clr, l.i));
+			method(&l, (a.x + get_coord(&l)), (a.y + (l.i * l.sign)), \
+				get_grad_color(img, &clr, l.i));
 		l.i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/19 14:13:35 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/19 20:18:27 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,15 @@ static int	deal_key(int key, void *prm)
 		x->a->x += 5;
 	if (key == 0)
 		x->a->x -= 5;
+	if (key == 18)
+	{
+		if (x->img->woo_prm == 0)
+			x->img->woo_prm = 1;
+		else
+			x->img->woo_prm = 0;
+	}
 	clear_window(x->img, x->win);
-	put_line_to_img(*x->img, *x->a, *x->b);
+	put_line_to_img(x->img, *x->a, *x->b);
 	mlx_put_image_to_window (x->mlx_ptr, x->win_ptr, x->img_ptr, 0, 0);
 	return (0);
 }
@@ -103,18 +110,19 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	//
 	a.x = 0;
 	a.y = 0;
-	a.color = 0x000000FF;
+	a.color = 0x000000;
 	b.x = 300;
 	b.y = 300;
 	x.a = &a;
 	x.b = &b;
 	x.win = &win;
 	x.img = &img;
-	b.color = 0xFF0000FF;
+	b.color = 0x000000;
 	img.win = &win;
-	img.b_clr = 0xFF0000;
+	img.b_clr = 0x999999;
+	img.woo_prm = 1;
 	clear_window(x.img, x.win);
-	put_line_to_img(img, a, b);
+	put_line_to_img(&img, a, b);
 	//print_image(img, win);
 	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);
 	mlx_key_hook(x.win_ptr, deal_key, (void*)&x);

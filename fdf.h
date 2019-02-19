@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/19 13:53:26 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/19 19:31:20 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_img_data
 	int				lsz;
 	int				ndn;
 	int				b_clr;
+	int				woo_prm;
 	t_win_prm		*win;
 }				t_img_data;
 
@@ -115,7 +116,24 @@ typedef struct	s_line_prm
 	int				i;
 	int				d_ind;
 	int				sign;
+	t_img_data		*img;
 }				t_line_prm;
+
+typedef struct	s_woo_prm
+{
+	int				i;
+	int				alpha;
+	int				reason;
+}				t_woo_prm;
+
+typedef struct	s_get_alpha
+{
+	int				coord;
+	int				w_coord;
+	int				alp;
+	int				alp_i;
+	unsigned char	*clr;
+}				t_get_alpha;
 
 int		error_msg(char *message);
 int		col_count(char ***row);
@@ -123,10 +141,11 @@ int 	free_arr(int ***map, int ***color, t_make_arr *a, int err);
 int		get_zeromap(t_make_arr *a, int ***map);
 int		window_control(int ***map, int ***color, t_map_prm m, char *name);
 int		get_color(char *str);
-void	put_pix_to_img(t_img_data img, int x, int y, int color);
-void	put_line_to_img(t_img_data img, t_pix_prm a, t_pix_prm b);
-void	print_image(t_img_data img, t_win_prm win);
+void	put_pix_to_img(t_line_prm *l, int x, int y, int color);
+void	put_line_to_img(t_img_data *img, t_pix_prm a, t_pix_prm b);
+void	put_woo_to_img(t_line_prm *l, int x, int y, int color);
 //
-void	print_maps(int ***map, int ***color, t_map_prm m);//! Убрать это потом!!
+void	print_image(t_img_data img, t_win_prm win);//! Убрать это потом!!
+void	print_maps(int ***map, int ***color, t_map_prm m);
 void	print_color(int color);
 #endif
