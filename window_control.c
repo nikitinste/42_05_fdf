@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/18 19:19:58 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/19 13:10:03 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	clear_window(t_img_data *img, t_win_prm	*win)
 	lenth = win->x * win->y;
 	while (i < (lenth))
 	{
-		image[i] = 0x000000;
+		image[i] = img->b_clr;
 		i++;
 	}
 }
@@ -101,17 +101,19 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	ft_putnbr(img.ndn);
 	ft_putchar('\n');
 	//
-	a.x = 50;
-	a.y = 50;
-	a.color = 0x00FF00;
-	b.x = 0;
-	b.y = 0;
+	a.x = 0;
+	a.y = 0;
+	a.color = 0x000000FF;
+	b.x = 400;
+	b.y = 400;
 	x.a = &a;
 	x.b = &b;
 	x.win = &win;
 	x.img = &img;
-	b.color = 0xFF0000;
+	b.color = 0xFF0000FF;
 	img.win = &win;
+	img.b_clr = 0xFF0000;
+	clear_window(x.img, x.win);
 	put_line_to_img(img, a, b);
 	//print_image(img, win);
 	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);

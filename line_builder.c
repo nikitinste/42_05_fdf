@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:18:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/18 19:05:03 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/19 13:53:55 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,30 @@ void			put_pix_to_img(t_img_data img, int x, int y, int color)
 		return ;
 	image = (int*)img.addr;
 	image[(y * (img.lsz / 4)) + x] = color;
+	//print_color(color);
 }
 
-int	get_grad_color(t_img_data *img, t_grad_prms *clr, int pos)
+int				get_grad_color(t_img_data *img, t_grad_prms *clr, int pos)
 {
 	int				start;
+	int				alpha;
 	t_grad			grad;
 
 	if (clr->a == clr->b || pos == 0)
 		return (clr->a);
 	if (img->ndn == 0)
+	{
 		start = 0;
+		alpha = 3;
+	}
 	else
+	{
 		start = 1;
+		alpha = 0;
+	}
 	grad.a = (unsigned char*)&clr->a;
 	grad.b = (unsigned char*)&clr->b;
+	grad.d_alpha = (int)grad.b[alpha] - (int)grad.a[alpha];
 	grad.d1 = (int)grad.b[start] - (int)grad.a[start];
 	grad.d2 = (int)grad.b[start + 1] - (int)grad.a[start + 1];
 	grad.d3 = (int)grad.b[start + 2] - (int)grad.a[start + 2];
@@ -43,6 +52,7 @@ int	get_grad_color(t_img_data *img, t_grad_prms *clr, int pos)
 	grad.c[start] = ((grad.d1 * pos) / clr->delta) + grad.a[start];
 	grad.c[start + 1] = ((grad.d2 * pos) / clr->delta) + grad.a[start + 1];
 	grad.c[start + 2] = ((grad.d3 * pos) / clr->delta) + grad.a[start + 2];
+	grad.c[alpha] = ((grad.d_alpha * pos) / clr->delta) + grad.a[alpha];
 	return (grad.color);
 }
 

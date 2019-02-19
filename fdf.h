@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/18 18:34:59 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/19 13:53:26 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_img_data
 	int				bpp;
 	int				lsz;
 	int				ndn;
+	int				b_clr;
 	t_win_prm		*win;
 }				t_img_data;
 
@@ -96,6 +97,7 @@ typedef struct	s_grad
 	unsigned char	*a;
 	unsigned char	*b;
 	unsigned char	*c;
+	int				d_alpha;
 	int				d1;
 	int				d2;
 	int				d3;
@@ -126,4 +128,5 @@ void	put_line_to_img(t_img_data img, t_pix_prm a, t_pix_prm b);
 void	print_image(t_img_data img, t_win_prm win);
 //
 void	print_maps(int ***map, int ***color, t_map_prm m);//! Убрать это потом!!
+void	print_color(int color);
 #endif
