@@ -6,64 +6,171 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:18:05 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/19 20:20:16 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/20 20:21:39 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "fdf.h"
 
-static int	get_alpha(t_line_prm *l, t_woo_prm *w, int color)
+static int	get_woo_color(t_line_prm *l, int color, int alpha_i)
+{
+	unsigned char	*clr;
+	int				alpha;
+
+	clr = (unsigned char*)&color;
+	if (l->img->ndn == 0)
+		alpha = 3;
+	else
+		alpha = 0;
+	//
+	alpha_i *= 255;
+	alpha_i /= 100;
+	//
+	//if (clr[alpha] == 0)
+	/*	*/clr[alpha] = /*(255 * */alpha_i/*) / 100*/;
+	/*else
+		clr[alpha] = (clr[alpha] * (100 + alpha_i)) / 100;*/
+	return (color);
+}
+
+static void	get_alpha(t_line_prm *l, t_woo_prm *woo)
 {
 	t_get_alpha	a;
 
-	w->reason = 0;
-	if ((l->i + w->i) < 0 || (l->i + w->i) > l->d_big)
-		return (0);
-	a.coord = ((l->d_small * (l->i)) / ft_abs(l->d_big));
-	a.w_coord = ((l->d_small * (l->i + w->i)) / ft_abs(l->d_big));
-	if (a.w_coord > (a.coord - 2) && a.w_coord < (a.coord + 2))
-		a.alp = (((l->d_small * (l->i + w->i)) * 100) / ft_abs(l->d_big)) % 100;
-	else
-		return (0);
-	w->alpha = color;
-	a.clr = (unsigned char*)&(w->alpha);
-	if (l->img->ndn == 0)
-		a.alp_i = 3;
-	else
-		a.alp_i = 0;
-	if (a.clr[a.alp_i] == 0)
-		a.clr[a.alp_i] = (255 * (100 - a.alp)) / 100;// - разобраться здесь!
-	else
-		a.clr[a.alp_i] = (a.clr[a.alp_i] * (100 - a.alp)) / 100;
-	w->reason = 1;
-	return (1);
+	woo->pos = 0;
+	woo->neg = 0;
+	a.remndr = (((ft_abs(l->d_small) * l->i) * 100) / ft_abs(l->d_big)) % 100;
+	if (a.remndr == 0)
+	{
+		woo->origin = 0;
+		return ;
+	}
+	if (a.remndr > 50)
+	{
+		woo->origin = 100 - a.remndr;
+		woo->neg = 100 - woo->origin;
+		return ;
+	}
+	if (a.remndr <= 5)
+	{
+		woo->origin = a.remndr;
+		woo->pos = 100 - woo->origin;
+		return ;
+	}
 }
 
 void		put_woo_to_img(t_line_prm *l, int x, int y, int color)
 {
-	t_woo_prm	pos;
-	t_woo_prm	neg;
+	t_woo_prm	woo;
 
-	pos.i = 0;
-	neg.i = 0;
 	if (l->d_ind == 1)
-		while (get_alpha(l, &pos, color) || get_alpha(l, &neg, color))
+	{
+		get_alpha(l, &woo);
+		if (woo.origin == 0)
 		{
-			if (pos.reason)
-				put_pix_to_img(l, (x + pos.i), y, pos.alpha);
-			if (neg.reason)
-				put_pix_to_img(l, (x + neg.i), y, neg.alpha);
-			pos.i++;
-			neg.i--;
+			put_pix_to_img(l, x, y, color);
+			ft_putstr("\t\t\t\t\t\t\t");
+			ft_putnbr(woo.neg);
+			ft_putchar('\t');
+			ft_putnbr(woo.origin);
+			ft_putchar('\t');
+			ft_putnbr(woo.pos);
+			ft_putchar('\n');
+			return ;
 		}
+		if (woo.pos > woo.neg)
+		{
+			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
+			put_pix_to_img(l, x, (y + 1), get_woo_color(l, color, woo.pos));
+			ft_putnbr(woo.neg);
+			ft_putchar('\t');
+			ft_putnbr(woo.origin);
+			ft_putchar('\t');
+			ft_putnbr(woo.pos);
+			ft_putchar('\n');
+			return ;
+		}
+		if (woo.pos < woo.neg)
+		{
+			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
+			put_pix_to_img(l, x, (y - 1), get_woo_color(l, color, woo.neg));
+			ft_putnbr(woo.neg);
+			ft_putchar('\t');
+			ft_putnbr(woo.origin);
+			ft_putchar('\t');
+			ft_putnbr(woo.pos);
+			ft_putchar('\n');
+			return ;
+		}
+		else
+		{
+			//ft_putstr("!\n");
+			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
+			//put_pix_to_img(l, x, (y + 1), get_woo_color(l, color, woo.pos));
+			//put_pix_to_img(l, x, (y - 1), get_woo_color(l, color, woo.neg));
+			ft_putstr("\t\t\t\t\t\t");
+			ft_putnbr(woo.neg);
+			ft_putchar('\t');
+			ft_putnbr(woo.origin);
+			ft_putchar('\t');
+			ft_putnbr(woo.pos);
+			ft_putchar('\n');
+			return ;
+		}
+	}
 	if (l->d_ind == 0)
-		while (get_alpha(l, &pos, color) || get_alpha(l, &neg, color))
+	{
+		get_alpha(l, &woo);
+		if (woo.origin == 0)
 		{
-			if (pos.reason)
-				put_pix_to_img(l, x, (y + pos.i), pos.alpha);
-			if (neg.reason)
-				put_pix_to_img(l, x, (y + neg.i), neg.alpha);
-			pos.i++;
-			neg.i--;
+			put_pix_to_img(l, x, y, color);
+			ft_putstr("\t\t\t\t\t\t\t");
+			ft_putnbr(woo.neg);
+			ft_putchar('\t');
+			ft_putnbr(woo.origin);
+			ft_putchar('\t');
+			ft_putnbr(woo.pos);
+			ft_putchar('\n');
+			return ;
 		}
+		if (woo.pos > woo.neg)
+		{
+			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
+			put_pix_to_img(l, (x + 1), y, get_woo_color(l, color, woo.pos));
+			ft_putnbr(woo.neg);
+			ft_putchar('\t');
+			ft_putnbr(woo.origin);
+			ft_putchar('\t');
+			ft_putnbr(woo.pos);
+			ft_putchar('\n');
+			return ;
+		}
+		if (woo.pos < woo.neg)
+		{
+			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
+			put_pix_to_img(l, (x - 1), y, get_woo_color(l, color, woo.neg));
+			ft_putnbr(woo.neg);
+			ft_putchar('\t');
+			ft_putnbr(woo.origin);
+			ft_putchar('\t');
+			ft_putnbr(woo.pos);
+			ft_putchar('\n');
+			return ;
+		}
+		else
+		{
+			//ft_putstr("!\n");
+			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
+			//put_pix_to_img(l, x, (y + 1), get_woo_color(l, color, woo.pos));
+			//put_pix_to_img(l, x, (y - 1), get_woo_color(l, color, woo.neg));
+			ft_putstr("\t\t\t\t\t\t");
+			ft_putnbr(woo.neg);
+			ft_putchar('\t');
+			ft_putnbr(woo.origin);
+			ft_putchar('\t');
+			ft_putnbr(woo.pos);
+			ft_putchar('\n');
+			return ;
+		}
+	}
 }

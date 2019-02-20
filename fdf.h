@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/19 19:31:20 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/20 15:10:22 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,18 +121,16 @@ typedef struct	s_line_prm
 
 typedef struct	s_woo_prm
 {
-	int				i;
-	int				alpha;
-	int				reason;
+	int				pos;
+	int				neg;
+	int				origin;
 }				t_woo_prm;
 
 typedef struct	s_get_alpha
 {
-	int				coord;
-	int				w_coord;
-	int				alp;
-	int				alp_i;
-	unsigned char	*clr;
+	int				remndr;
+	int				p_dist;
+	int				n_dist;
 }				t_get_alpha;
 
 int		error_msg(char *message);

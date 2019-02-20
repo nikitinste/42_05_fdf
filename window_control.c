@@ -6,13 +6,13 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/19 20:18:27 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/20 20:45:08 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "fdf.h"
 
-void	clear_window(t_img_data *img, t_win_prm	*win)
+void	clear_image(t_img_data *img, t_win_prm	*win)
 {
 	int		*image;
 	int		i;
@@ -74,7 +74,7 @@ static int	deal_key(int key, void *prm)
 		else
 			x->img->woo_prm = 0;
 	}
-	clear_window(x->img, x->win);
+	clear_image(x->img, x->win);
 	put_line_to_img(x->img, *x->a, *x->b);
 	mlx_put_image_to_window (x->mlx_ptr, x->win_ptr, x->img_ptr, 0, 0);
 	return (0);
@@ -111,7 +111,7 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	a.x = 0;
 	a.y = 0;
 	a.color = 0x000000;
-	b.x = 300;
+	b.x = 250;
 	b.y = 300;
 	x.a = &a;
 	x.b = &b;
@@ -119,9 +119,9 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	x.img = &img;
 	b.color = 0x000000;
 	img.win = &win;
-	img.b_clr = 0x999999;
+	img.b_clr = 0xFFFFFF;
 	img.woo_prm = 1;
-	clear_window(x.img, x.win);
+	clear_image(x.img, x.win);
 	put_line_to_img(&img, a, b);
 	//print_image(img, win);
 	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);

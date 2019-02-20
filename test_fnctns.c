@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:12:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/19 12:30:19 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/20 20:15:59 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,5 @@ void	print_color(int color)
 	ft_putnbr(clr_byte[2]);
 	ft_putchar(' ');
 	ft_putnbr(clr_byte[3]);
-	ft_putchar('\n');
+	ft_putchar('\t');
 }

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:18:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/19 19:37:04 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/20 20:15:19 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ void			put_pix_to_img(t_line_prm *l, int x, int y, int color)
 	if (x < 0 || y < 0 || x >= l->img->win->x || y >= l->img->win->y)
 		return ;
 	image = (int*)l->img->addr;
+	print_color(image[(y * (l->img->lsz / 4)) + x]);
 	image[(y * (l->img->lsz / 4)) + x] = color;
-	//print_color(color);
+	ft_putnbr(x);
+	ft_putchar('\t');
+	ft_putnbr(y);
+	ft_putchar('\t');
+	print_color(image[(y * (l->img->lsz / 4)) + x]);
 }
 
 int				get_grad_color(t_img_data *img, t_grad_prms *clr, int pos)
@@ -84,7 +89,11 @@ static int		get_coord(t_line_prm *l)
 
 	if (l->i == ft_abs(l->d_big))
 		return (l->d_small);
-	coord = ((l->d_small * l->i) / ft_abs(l->d_big));
+	coord = (((l->d_small * l->i) * 10) / ft_abs(l->d_big));
+	if (coord % 10 > 5)
+		coord = ((coord / 10) + 1);
+	else
+		coord /= 10;
 	return (coord);
 }
 
