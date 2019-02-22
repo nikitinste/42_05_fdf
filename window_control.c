@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/22 18:29:24 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/22 20:17:25 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,14 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	//
 	a.x = 100;
 	a.y = 100;
-	a.color = 0xFF0000;
+	a.color = 0xFFFF0000;
 	b.x = 116;
 	b.y = 96;
 	x.a = &a;
 	x.b = &b;
 	x.win = &win;
 	x.img = &img;
-	b.color = 0xFF0000FF;
+	b.color = 0x000000FF;
 	img.win = &win;
 	img.b_clr = 0xFFFFFF;
 	img.woo_prm = 1;
