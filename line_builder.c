@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:18:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/20 20:15:19 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/22 12:51:26 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ static int		get_coord(t_line_prm *l)
 
 	if (l->i == ft_abs(l->d_big))
 		return (l->d_small);
-	coord = (((l->d_small * l->i) * 10) / ft_abs(l->d_big));
-	if (coord % 10 > 5)
-		coord = ((coord / 10) + 1);
+	coord = (((l->d_small * l->i) * 100) / ft_abs(l->d_big));
+	if (coord % 100 > 50)
+		coord = ((coord / 100) + 1);
 	else
-		coord /= 10;
+		coord /= 100;
 	return (coord);
 }
 

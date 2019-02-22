@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:18:05 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/20 20:21:39 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/22 13:03:35 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,10 @@ static int	get_woo_color(t_line_prm *l, int color, int alpha_i)
 		alpha = 3;
 	else
 		alpha = 0;
-	//
-	alpha_i *= 255;
-	alpha_i /= 100;
-	//
-	//if (clr[alpha] == 0)
-	/*	*/clr[alpha] = /*(255 * */alpha_i/*) / 100*/;
-	/*else
-		clr[alpha] = (clr[alpha] * (100 + alpha_i)) / 100;*/
+	if (clr[alpha] == 0)
+		clr[alpha] = (255 * alpha_i) / 100;
+	else
+		clr[alpha] = ((255 - clr[alpha]) * (100 - alpha_i)) / 100;
 	return (color);
 }
 
@@ -40,6 +36,8 @@ static void	get_alpha(t_line_prm *l, t_woo_prm *woo)
 	woo->pos = 0;
 	woo->neg = 0;
 	a.remndr = (((ft_abs(l->d_small) * l->i) * 100) / ft_abs(l->d_big)) % 100;
+	ft_putnbr(a.remndr);
+	ft_putchar('\t');
 	if (a.remndr == 0)
 	{
 		woo->origin = 0;
@@ -51,7 +49,7 @@ static void	get_alpha(t_line_prm *l, t_woo_prm *woo)
 		woo->neg = 100 - woo->origin;
 		return ;
 	}
-	if (a.remndr <= 5)
+	if (a.remndr <= 50)
 	{
 		woo->origin = a.remndr;
 		woo->pos = 100 - woo->origin;
@@ -102,7 +100,7 @@ void		put_woo_to_img(t_line_prm *l, int x, int y, int color)
 			ft_putchar('\n');
 			return ;
 		}
-		else
+		/*else
 		{
 			//ft_putstr("!\n");
 			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
@@ -114,9 +112,10 @@ void		put_woo_to_img(t_line_prm *l, int x, int y, int color)
 			ft_putnbr(woo.origin);
 			ft_putchar('\t');
 			ft_putnbr(woo.pos);
+			ft_putstr(" !");
 			ft_putchar('\n');
 			return ;
-		}
+		}*/
 	}
 	if (l->d_ind == 0)
 	{
@@ -157,7 +156,7 @@ void		put_woo_to_img(t_line_prm *l, int x, int y, int color)
 			ft_putchar('\n');
 			return ;
 		}
-		else
+		/*else
 		{
 			//ft_putstr("!\n");
 			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
@@ -169,8 +168,9 @@ void		put_woo_to_img(t_line_prm *l, int x, int y, int color)
 			ft_putnbr(woo.origin);
 			ft_putchar('\t');
 			ft_putnbr(woo.pos);
+			ft_putstr(" !");
 			ft_putchar('\n');
 			return ;
-		}
+		}*/
 	}
 }
