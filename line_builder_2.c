@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:18:05 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/22 13:03:35 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/22 14:08:09 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	get_woo_color(t_line_prm *l, int color, int alpha_i)
 	if (clr[alpha] == 0)
 		clr[alpha] = (255 * alpha_i) / 100;
 	else
-		clr[alpha] = ((255 - clr[alpha]) * (100 - alpha_i)) / 100;
+		clr[alpha] = 255 - (((255 - clr[alpha]) * (100 - alpha_i)) / 100);
 	return (color);
 }
 

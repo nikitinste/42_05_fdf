@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/22 13:06:09 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/22 14:09:49 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,21 @@ static int	deal_key(int key, void *prm)
 		exit (0);
 	}
 	if (key == 126)
-		x->b->y -= 1;
+		x->b->y -= 5;
 	if (key == 125)
-		x->b->y += 1;
+		x->b->y += 5;
 	if (key == 124)
-		x->b->x += 1;
+		x->b->x += 5;
 	if (key == 123)
-		x->b->x -= 1;
+		x->b->x -= 5;
 	if (key == 13)
-		x->a->y -= 1;
+		x->a->y -= 5;
 	if (key == 1)
-		x->a->y += 1;
+		x->a->y += 5;
 	if (key == 2)
-		x->a->x += 1;
+		x->a->x += 5;
 	if (key == 0)
-		x->a->x -= 1;
+		x->a->x -= 5;
 	if (key == 18)
 	{
 		if (x->img->woo_prm == 0)
@@ -112,13 +112,13 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	a.x = 0;
 	a.y = 0;
 	a.color = 0x00FF0000;
-	b.x = 2;
-	b.y = 3;
+	b.x = 50;
+	b.y = 50;
 	x.a = &a;
 	x.b = &b;
 	x.win = &win;
 	x.img = &img;
-	b.color = 0x000000FF;
+	b.color = 0xFF0000FF;
 	img.win = &win;
 	img.b_clr = 0xFFFFFF;
 	img.woo_prm = 1;
