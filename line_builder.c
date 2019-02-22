@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:18:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/22 12:51:26 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/22 16:53:03 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,7 @@ void			put_pix_to_img(t_line_prm *l, int x, int y, int color)
 	if (x < 0 || y < 0 || x >= l->img->win->x || y >= l->img->win->y)
 		return ;
 	image = (int*)l->img->addr;
-	print_color(image[(y * (l->img->lsz / 4)) + x]);
 	image[(y * (l->img->lsz / 4)) + x] = color;
-	ft_putnbr(x);
-	ft_putchar('\t');
-	ft_putnbr(y);
-	ft_putchar('\t');
-	print_color(image[(y * (l->img->lsz / 4)) + x]);
 }
 
 int				get_grad_color(t_img_data *img, t_grad_prms *clr, int pos)
@@ -86,12 +80,17 @@ static void		get_delta(t_pix_prm *a, t_pix_prm *b, t_line_prm *l)
 static int		get_coord(t_line_prm *l)
 {
 	int				coord;
+	int				sign;
 
+	if (l->d_small < 0)
+		sign = -1;
+	else
+		sign = 1;
 	if (l->i == ft_abs(l->d_big))
 		return (l->d_small);
 	coord = (((l->d_small * l->i) * 100) / ft_abs(l->d_big));
-	if (coord % 100 > 50)
-		coord = ((coord / 100) + 1);
+	if (ft_abs(coord % 100) > 50)
+		coord = ((coord / 100) + (1 * sign));
 	else
 		coord /= 100;
 	return (coord);

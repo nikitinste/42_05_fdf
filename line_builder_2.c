@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:18:05 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/22 14:08:09 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/22 17:10:17 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static void	get_alpha(t_line_prm *l, t_woo_prm *woo)
 	woo->pos = 0;
 	woo->neg = 0;
 	a.remndr = (((ft_abs(l->d_small) * l->i) * 100) / ft_abs(l->d_big)) % 100;
-	ft_putnbr(a.remndr);
-	ft_putchar('\t');
 	if (a.remndr == 0)
 	{
 		woo->origin = 0;
@@ -60,62 +58,32 @@ static void	get_alpha(t_line_prm *l, t_woo_prm *woo)
 void		put_woo_to_img(t_line_prm *l, int x, int y, int color)
 {
 	t_woo_prm	woo;
+	int			sign;
 
+	if (l->d_small < 0)
+		sign = -1;
+	else
+		sign = 1;
 	if (l->d_ind == 1)
 	{
 		get_alpha(l, &woo);
 		if (woo.origin == 0)
 		{
 			put_pix_to_img(l, x, y, color);
-			ft_putstr("\t\t\t\t\t\t\t");
-			ft_putnbr(woo.neg);
-			ft_putchar('\t');
-			ft_putnbr(woo.origin);
-			ft_putchar('\t');
-			ft_putnbr(woo.pos);
-			ft_putchar('\n');
 			return ;
 		}
 		if (woo.pos > woo.neg)
 		{
 			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
-			put_pix_to_img(l, x, (y + 1), get_woo_color(l, color, woo.pos));
-			ft_putnbr(woo.neg);
-			ft_putchar('\t');
-			ft_putnbr(woo.origin);
-			ft_putchar('\t');
-			ft_putnbr(woo.pos);
-			ft_putchar('\n');
+			put_pix_to_img(l, x, (y + (1 * sign)), get_woo_color(l, color, woo.pos));
 			return ;
 		}
 		if (woo.pos < woo.neg)
 		{
 			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
-			put_pix_to_img(l, x, (y - 1), get_woo_color(l, color, woo.neg));
-			ft_putnbr(woo.neg);
-			ft_putchar('\t');
-			ft_putnbr(woo.origin);
-			ft_putchar('\t');
-			ft_putnbr(woo.pos);
-			ft_putchar('\n');
+			put_pix_to_img(l, x, (y - (1 * sign)), get_woo_color(l, color, woo.neg));
 			return ;
 		}
-		/*else
-		{
-			//ft_putstr("!\n");
-			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
-			//put_pix_to_img(l, x, (y + 1), get_woo_color(l, color, woo.pos));
-			//put_pix_to_img(l, x, (y - 1), get_woo_color(l, color, woo.neg));
-			ft_putstr("\t\t\t\t\t\t");
-			ft_putnbr(woo.neg);
-			ft_putchar('\t');
-			ft_putnbr(woo.origin);
-			ft_putchar('\t');
-			ft_putnbr(woo.pos);
-			ft_putstr(" !");
-			ft_putchar('\n');
-			return ;
-		}*/
 	}
 	if (l->d_ind == 0)
 	{
@@ -123,54 +91,19 @@ void		put_woo_to_img(t_line_prm *l, int x, int y, int color)
 		if (woo.origin == 0)
 		{
 			put_pix_to_img(l, x, y, color);
-			ft_putstr("\t\t\t\t\t\t\t");
-			ft_putnbr(woo.neg);
-			ft_putchar('\t');
-			ft_putnbr(woo.origin);
-			ft_putchar('\t');
-			ft_putnbr(woo.pos);
-			ft_putchar('\n');
 			return ;
 		}
 		if (woo.pos > woo.neg)
 		{
 			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
-			put_pix_to_img(l, (x + 1), y, get_woo_color(l, color, woo.pos));
-			ft_putnbr(woo.neg);
-			ft_putchar('\t');
-			ft_putnbr(woo.origin);
-			ft_putchar('\t');
-			ft_putnbr(woo.pos);
-			ft_putchar('\n');
+			put_pix_to_img(l, (x + (1 * sign)), y, get_woo_color(l, color, woo.pos));
 			return ;
 		}
 		if (woo.pos < woo.neg)
 		{
 			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
-			put_pix_to_img(l, (x - 1), y, get_woo_color(l, color, woo.neg));
-			ft_putnbr(woo.neg);
-			ft_putchar('\t');
-			ft_putnbr(woo.origin);
-			ft_putchar('\t');
-			ft_putnbr(woo.pos);
-			ft_putchar('\n');
+			put_pix_to_img(l, (x - (1 * sign)), y, get_woo_color(l, color, woo.neg));
 			return ;
 		}
-		/*else
-		{
-			//ft_putstr("!\n");
-			put_pix_to_img(l, x, y, get_woo_color(l, color, woo.origin));
-			//put_pix_to_img(l, x, (y + 1), get_woo_color(l, color, woo.pos));
-			//put_pix_to_img(l, x, (y - 1), get_woo_color(l, color, woo.neg));
-			ft_putstr("\t\t\t\t\t\t");
-			ft_putnbr(woo.neg);
-			ft_putchar('\t');
-			ft_putnbr(woo.origin);
-			ft_putchar('\t');
-			ft_putnbr(woo.pos);
-			ft_putstr(" !");
-			ft_putchar('\n');
-			return ;
-		}*/
 	}
 }

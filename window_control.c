@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/22 14:09:49 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/22 17:05:06 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,11 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	ft_putnbr(img.ndn);
 	ft_putchar('\n');
 	//
-	a.x = 0;
-	a.y = 0;
-	a.color = 0x00FF0000;
-	b.x = 50;
-	b.y = 50;
+	a.x = 100;
+	a.y = 100;
+	a.color = 0xFF0000;
+	b.x = 115;
+	b.y = 95;
 	x.a = &a;
 	x.b = &b;
 	x.win = &win;
