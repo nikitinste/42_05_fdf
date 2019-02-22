@@ -6,20 +6,21 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:18:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/22 16:53:03 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/22 17:23:00 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "fdf.h"
 
-void			put_pix_to_img(t_line_prm *l, int x, int y, int color)
+int				put_pix_to_img(t_line_prm *l, int x, int y, int color)
 {
 	int	*image;
 
 	if (x < 0 || y < 0 || x >= l->img->win->x || y >= l->img->win->y)
-		return ;
+		return (0);
 	image = (int*)l->img->addr;
 	image[(y * (l->img->lsz / 4)) + x] = color;
+	return (0);
 }
 
 int				get_grad_color(t_img_data *img, t_grad_prms *clr, int pos)
@@ -100,7 +101,7 @@ void			put_line_to_img(t_img_data *img, t_pix_prm a, t_pix_prm b)
 {
 	t_line_prm		l;
 	t_grad_prms		clr;
-	void			(*method)(t_line_prm*, int, int, int);
+	int				(*method)(t_line_prm*, int, int, int);
 
 	if (img->woo_prm == 0)
 		method = &put_pix_to_img;
