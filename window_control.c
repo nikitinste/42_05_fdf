@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/22 20:17:25 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/24 15:10:50 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ void	clear_image(t_img_data *img, t_win_prm	*win)
 	}
 }
 
+static void	set_img_param(t_mlx_prms *x, t_pix_prm *a, t_pix_prm *b, \
+	t_img_data *img)
+{
+	a->x = 100;
+	a->y = 100;
+	a->color = 0xFFFF0000;
+	b->x = 116;
+	b->y = 96;
+	b->color = 0x000000FF;
+	x->a = a;
+	x->b = b;
+	img->b_clr = 0xFFFFFF;
+	img->woo_prm = 1;
+}
+
 static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
 {
 	win->x = WIN_X;
@@ -39,46 +54,6 @@ static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
 		win->y = m.y * 20;
 	}
 	return (1);
-}
-static int	deal_key(int key, void *prm)
-{
-	t_mlx_prms	*x;
-
-	x = (t_mlx_prms*)prm;
-	if (key == 53)
-	{
-		ft_putnbr(key);
-		mlx_destroy_window (x->mlx_ptr, x->win_ptr);
-		exit (0);
-	}
-	if (key == 126)
-		x->b->y -= 2;
-	if (key == 125)
-		x->b->y += 2;
-	if (key == 124)
-		x->b->x += 2;
-	if (key == 123)
-		x->b->x -= 2;
-	if (key == 13)
-		x->a->y -= 2;
-	if (key == 1)
-		x->a->y += 2;
-	if (key == 2)
-		x->a->x += 2;
-	if (key == 0)
-		x->a->x -= 2;
-	if (key == 18)
-	{
-		if (x->img->woo_prm == 0)
-			x->img->woo_prm = 1;
-		else
-			x->img->woo_prm = 0;
-	}
-	clear_image(x->img, x->win);
-	mlx_put_image_to_window (x->mlx_ptr, x->win_ptr, x->img_ptr, 0, 0);
-	put_line_to_img(x->img, *x->a, *x->b);
-	mlx_put_image_to_window (x->mlx_ptr, x->win_ptr, x->img_ptr, 0, 0);
-	return (0);
 }
 
 int			window_control(int ***map, int ***color, t_map_prm m, char *name)
@@ -95,33 +70,12 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	x.mlx_ptr = mlx_init();
 	x.win_ptr = mlx_new_window(x.mlx_ptr, win.x, win.y, win.name);
 	x.img_ptr = mlx_new_image (x.mlx_ptr, win.x, win.y);
-	img.addr = mlx_get_data_addr (x.img_ptr, &img.bpp, &img.lsz, &img.ndn);
-	//
-	ft_putendl(win.name);
-	ft_putnbr(win.x);
-	ft_putchar('x');
-	ft_putnbr(win.y);
-	ft_putchar('\n');
-	ft_putnbr(img.bpp);
-	ft_putchar('\n');
-	ft_putnbr(img.lsz);
-	ft_putchar('\n');
-	ft_putnbr(img.ndn);
-	ft_putchar('\n');
-	//
-	a.x = 100;
-	a.y = 100;
-	a.color = 0xFFFF0000;
-	b.x = 116;
-	b.y = 96;
-	x.a = &a;
-	x.b = &b;
+	img.addr = mlx_get_data_addr (x.img_ptr, &img.bpp, &img.lsz, &img.ndn);	//
+	print_win_param(&win, &img);//
 	x.win = &win;
 	x.img = &img;
-	b.color = 0x000000FF;
 	img.win = &win;
-	img.b_clr = 0xFFFFFF;
-	img.woo_prm = 1;
+	set_img_param(&x, &a, &b, &img);
 	clear_image(x.img, x.win);
 	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);
 	put_line_to_img(&img, a, b);

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:12:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/20 20:15:59 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/24 13:57:31 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,21 @@ void	print_image(t_img_data img, t_win_prm win)
 		}
 		ft_putchar('\n');
 	}
+}
+
+void	print_win_param(t_win_prm *win, t_img_data *img)
+{
+	ft_putendl(win->name);
+	ft_putnbr(win->x);
+	ft_putchar('x');
+	ft_putnbr(win->y);
+	ft_putchar('\n');
+	ft_putnbr(img->bpp);
+	ft_putchar('\n');
+	ft_putnbr(img->lsz);
+	ft_putchar('\n');
+	ft_putnbr(img->ndn);
+	ft_putchar('\n');
 }
 
 void	print_color(int color)

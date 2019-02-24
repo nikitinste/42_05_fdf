@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/22 18:20:17 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/24 13:57:10 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,12 @@ int		get_color(char *str);
 int		put_pix_to_img(t_line_prm *l, int x, int y, int color);
 void	put_line_to_img(t_img_data *img, t_pix_prm a, t_pix_prm b);
 int		put_woo_to_img(t_line_prm *l, int x, int y, int color);
+void	clear_image(t_img_data *img, t_win_prm	*win);
+int		deal_key(int key, void *prm);
 int 	close_window(void *param);
 //
 void	print_image(t_img_data img, t_win_prm win);//! Убрать это потом!!
+void	print_win_param(t_win_prm *win, t_img_data *img);
 void	print_maps(int ***map, int ***color, t_map_prm m);
 void	print_color(int color);
 #endif
