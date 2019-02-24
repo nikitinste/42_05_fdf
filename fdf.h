@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/24 13:57:10 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/24 20:18:37 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # define BUF a->buf_str[a->buf_i]
 # define WIN_X 0
 # define WIN_Y 0
+# define SCALE 10
+
+typedef struct	s_view_prms t_view_prms;
+
+/* Operational map array params: a */
 
 typedef struct	s_make_arr
 {
@@ -57,10 +62,11 @@ typedef struct	s_img_data
 	int				ndn;
 	int				b_clr;
 	int				woo_prm;
+	int				far_prm;
 	t_win_prm		*win;
 }				t_img_data;
 
-/* Current dot params: a b */
+/* Current dot params: a, b */
 
 typedef struct	s_pix_prm
 {
@@ -76,11 +82,45 @@ typedef struct	s_mlx_prms
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
-	t_pix_prm		*a;
-	t_pix_prm		*b;
+	/*t_pix_prm		*a;
+	t_pix_prm		*b;*/
 	t_win_prm		*win;
 	t_img_data		*img;
+	t_map_prm		*m;
+	t_view_prms		*v;
 }				t_mlx_prms;
+
+/* Perspective prms: p */
+
+typedef struct	s_perp_prms
+{
+	int				far;
+	int				height;
+}				t_perp_prms;
+
+/* View params: v */
+
+struct s_view_prms
+{
+	int				proj;
+	int				x_ang;
+	int				y_ang;
+	int				z_ang;
+	int				scale;
+	int				x;
+	int				y;
+	t_perp_prms		*p;
+
+};
+
+/* Coords: crd */
+
+typedef struct	s_coords
+{
+	int				**x;
+	int				**y;
+	int				**far;
+}				t_coords;
 
 /* Input grad params: clr */
 
@@ -137,6 +177,7 @@ int		error_msg(char *message);
 int		col_count(char ***row);
 int 	free_arr(int ***map, int ***color, t_make_arr *a, int err);
 int		get_zeromap(t_make_arr *a, int ***map);
+int		get_new_map(int row_count, int col_count, int ***map);
 int		window_control(int ***map, int ***color, t_map_prm m, char *name);
 int		get_color(char *str);
 int		put_pix_to_img(t_line_prm *l, int x, int y, int color);
@@ -145,6 +186,7 @@ int		put_woo_to_img(t_line_prm *l, int x, int y, int color);
 void	clear_image(t_img_data *img, t_win_prm	*win);
 int		deal_key(int key, void *prm);
 int 	close_window(void *param);
+void	draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color);
 //
 void	print_image(t_img_data img, t_win_prm win);//! Убрать это потом!!
 void	print_win_param(t_win_prm *win, t_img_data *img);

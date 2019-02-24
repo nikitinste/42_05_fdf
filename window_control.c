@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/24 15:10:50 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/24 20:19:35 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,26 @@ void	clear_image(t_img_data *img, t_win_prm	*win)
 	}
 }
 
-static void	set_img_param(t_mlx_prms *x, t_pix_prm *a, t_pix_prm *b, \
-	t_img_data *img)
+static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
+	t_perp_prms *p)
 {
-	a->x = 100;
-	a->y = 100;
-	a->color = 0xFFFF0000;
-	b->x = 116;
-	b->y = 96;
-	b->color = 0x000000FF;
-	x->a = a;
-	x->b = b;
 	img->b_clr = 0xFFFFFF;
 	img->woo_prm = 1;
+	img->far_prm = 0;
+	x->v = v;
+	v->proj = 0;
+	v->x_ang = 0;
+	v->y_ang = 0;
+	v->z_ang = 0;
+	if (SCALE > 9 && SCALE < 51)
+		v->scale = SCALE;
+	else
+		v->scale = 10;
+	v->x = x->win->x / 2;
+	v->y = x->win->y / 2;
+	v->p = p;
+	p->far = 100;
+	p->height = 50;
 }
 
 static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
@@ -61,8 +68,8 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	t_mlx_prms	x;
 	t_win_prm	win;
 	t_img_data	img;
-	t_pix_prm	a;
-	t_pix_prm	b;
+	t_view_prms	v;
+	t_perp_prms	p;
 
 	print_maps(map, color, m);
 	if (!window_param(map, m, &win, name))
@@ -74,11 +81,13 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	print_win_param(&win, &img);//
 	x.win = &win;
 	x.img = &img;
+	x.m = &m;
 	img.win = &win;
-	set_img_param(&x, &a, &b, &img);
 	clear_image(x.img, x.win);
 	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);
-	put_line_to_img(&img, a, b);
+	set_img_param(&x, &img, &v, &p);
+	draw_image(&x, &v, map, color);
+	//put_line_to_img(&img, a, b);
 	//print_image(img, win);
 	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);
 	mlx_hook(x.win_ptr, 2, 0, &deal_key, (void*)&x);
