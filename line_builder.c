@@ -17,9 +17,9 @@ int				put_pix_to_img(t_line_prm *l, int x, int y, int color)
 	int	*image;
 
 	if (x < 0 || y < 0 || x >= l->img->win->x || y >= l->img->win->y)
-		return (0);
+									return (0);
 	image = (int*)l->img->addr;
-	image[(y * (l->img->lsz / 4)) + x] = color;
+	image[(y * (l->img->lsz / 4))+ 			x] = color;
 	return (0);
 }
 
@@ -124,3 +124,4 @@ void			put_line_to_img(t_img_data *img, t_pix_prm a, t_pix_prm b)
 		l.i++;
 	}
 }
+

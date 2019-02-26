@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 18:00:49 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/26 21:22:05 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define WIN_X 0
 # define WIN_Y 0
 # define SCALE 10
+# define SCL v->scale
+
 
 typedef struct	s_view_prms t_view_prms;
 
