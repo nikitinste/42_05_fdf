@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/24 20:19:35 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/26 14:58:56 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 	v->x = x->win->x / 2;
 	v->y = x->win->y / 2;
 	v->p = p;
+	v->line_clr = 0x000000;
 	p->far = 100;
 	p->height = 50;
 }

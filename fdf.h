@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/24 20:18:37 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/26 14:58:12 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ struct s_view_prms
 	int				scale;
 	int				x;
 	int				y;
+	int				line_clr;
 	t_perp_prms		*p;
 
 };
@@ -120,6 +121,8 @@ typedef struct	s_coords
 	int				**x;
 	int				**y;
 	int				**far;
+	int				***map;
+	int				***color;
 }				t_coords;
 
 /* Input grad params: clr */
