@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 14:58:12 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/26 18:00:49 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct	s_make_arr
 	int				row_i;
 	int				buf_i;
 }				t_make_arr;
+
+/* Map params: m */
 
 typedef struct	s_map_prm
 {
@@ -88,6 +90,8 @@ typedef struct	s_mlx_prms
 	t_img_data		*img;
 	t_map_prm		*m;
 	t_view_prms		*v;
+	int				***map;
+	int				***color;
 }				t_mlx_prms;
 
 /* Perspective prms: p */
@@ -124,6 +128,16 @@ typedef struct	s_coords
 	int				***map;
 	int				***color;
 }				t_coords;
+
+/* Operational draw image params: draw */
+
+typedef struct	s_draw_image
+{
+	t_pix_prm	a;
+	t_pix_prm	b;
+	int			x;
+	int			y;
+}				t_draw_image;
 
 /* Input grad params: clr */
 

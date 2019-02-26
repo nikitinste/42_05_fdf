@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/24 17:42:12 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/26 18:01:34 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		deal_key(int key, void *prm)
 	}
 	clear_image(x->img, x->win);
 	mlx_put_image_to_window (x->mlx_ptr, x->win_ptr, x->img_ptr, 0, 0);
-	draw_image(x, &v, map, color);
+	draw_image(x, x->v, x->map, x->color);
 	//put_line_to_img(x->img, *x->a, *x->b);
 	mlx_put_image_to_window (x->mlx_ptr, x->win_ptr, x->img_ptr, 0, 0);
 	return (0);

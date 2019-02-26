@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 14:58:56 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/26 18:09:43 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,11 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	x.img = &img;
 	x.m = &m;
 	img.win = &win;
+	x.color = color;
+	x.map = map;
+	set_img_param(&x, &img, &v, &p);
 	clear_image(x.img, x.win);
 	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);
-	set_img_param(&x, &img, &v, &p);
 	draw_image(&x, &v, map, color);
 	//put_line_to_img(&img, a, b);
 	//print_image(img, win);
