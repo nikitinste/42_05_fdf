@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 21:22:05 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/26 21:53:50 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define BUF a->buf_str[a->buf_i]
 # define WIN_X 0
 # define WIN_Y 0
-# define SCALE 10
+# define SCALE 20
 # define SCL v->scale
 
 

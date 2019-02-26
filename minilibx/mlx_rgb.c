@@ -83,7 +83,8 @@ struct s_col_name mlx_col_name[] =
  { "medium slate" , 0x7b68ee },
  { "mediumslateblue" , 0x7b68ee },
  { "light slate" , 0x8470ff },
- { "lightslateblue" , 0x8470ff },
+ { "lightslateblue" , 0x8470ff
+ },
  { "medium blue" , 0xcd },
  { "mediumblue" , 0xcd },
  { "royal blue" , 0x4169e1 },

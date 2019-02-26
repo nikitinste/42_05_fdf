@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 21:24:11 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/26 21:53:52 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	clear_image(t_img_data *img, t_win_prm	*win)
 static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 	t_perp_prms *p)
 {
-	img->b_clr = 0xFFFFFF;
+	img->b_clr = 0x000000;
 	img->woo_prm = 1;
 	img->far_prm = 0;
 	x->v = v;
@@ -46,7 +46,7 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 	v->x = x->win->x / 2;
 	v->y = x->win->y / 2;
 	v->p = p;
-	v->line_clr = 0x000000;
+	v->line_clr = -1;
 	p->far = 100;
 	p->height = 50;
 }
@@ -58,8 +58,8 @@ static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
 	win->name = ft_strjoin("fdf ", name);
 	if ((win->x == 0 || win->y == 0) && map)
 	{
-		win->x = m.y * SCALE * 5;
-		win->y = m.x * SCALE * 5;
+		win->x = m.y * SCALE * 1;
+		win->y = m.x * SCALE * 1;
 	}
 	return (1);
 }
