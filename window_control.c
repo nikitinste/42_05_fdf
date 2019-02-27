@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/27 16:15:44 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/27 21:45:55 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 	v->x = x->win->x / 2;
 	v->y = x->win->y / 2;
 	v->p = p;
+	v->img = img;
 	if (x->color[0])
 		v->line_clr = -1;
 	else

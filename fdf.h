@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/27 16:34:08 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/27 21:38:27 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ struct s_view_prms
 	int				y;
 	int				line_clr;
 	t_perp_prms		*p;
+	t_img_data		*img;
 
 };
 

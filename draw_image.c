@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/27 16:32:56 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/27 21:42:45 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,17 @@ static void	set_hor_line(t_coords *crd, t_draw_image *draw, \
 	if (v->line_clr < 0 && color[0])
 	{
 		draw->a.color = color[0][draw->x][draw->y];
+		if (draw->a.color == v->img->b_clr)
+			draw->a.color = get_invers_clr(draw->a.color, v->img->ndn);
 		draw->b.color = color[0][draw->x][draw->y + 1];
+		if (draw->b.color == v->img->b_clr)
+			draw->b.color = get_invers_clr(draw->b.color, v->img->ndn);
 	}
 	else
+	{
 		draw->a.color = v->line_clr;
 		draw->b.color = v->line_clr;
+	}
 }
 
 static void	set_vert_line(t_coords *crd, t_draw_image *draw, \
@@ -71,11 +77,17 @@ static void	set_vert_line(t_coords *crd, t_draw_image *draw, \
 	if (v->line_clr < 0 && color[0])
 	{
 		draw->a.color = color[0][draw->x][draw->y];
+		if (draw->a.color == v->img->b_clr)
+			draw->a.color = get_invers_clr(draw->a.color, v->img->ndn);
 		draw->b.color = color[0][draw->x + 1][draw->y];
+		if (draw->b.color == v->img->b_clr)
+			draw->b.color = get_invers_clr(draw->b.color, v->img->ndn);
 	}
 	else
+	{
 		draw->a.color = v->line_clr;
 		draw->b.color = v->line_clr;
+	}
 }
 
 void	draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color)
