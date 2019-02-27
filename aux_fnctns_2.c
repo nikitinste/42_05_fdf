@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 19:30:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 16:13:11 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/27 16:26:06 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,28 @@ int		get_new_map(int row_count, int col_count, int ***map)
 		row++;
 	}
 	return (1);
+}
+
+int		get_invers_clr(int color, int ndn)
+{
+	int				start;
+	int				inverse;
+	int				i;
+	unsigned char	*clr;
+	unsigned char	*inv;
+
+	if (ndn == 0)
+		start = 0;
+	else
+		start = 1;
+	inverse = 0;
+	clr = (unsigned char *)&color;
+	inv = (unsigned char *)&inverse;
+	i = 0;
+	while (i < 3)
+	{
+		inv[start + i] = 255 - clr[start + i];
+		i++;
+	}
+	return (inverse);
 }

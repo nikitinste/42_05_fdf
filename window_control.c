@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 21:53:52 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/27 16:15:44 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 	v->x = x->win->x / 2;
 	v->y = x->win->y / 2;
 	v->p = p;
-	v->line_clr = -1;
+	if (x->color[0])
+		v->line_clr = -1;
+	else
+		v->line_clr = get_invers_clr(img->b_clr, img->ndn);
 	p->far = 100;
 	p->height = 50;
 }
@@ -58,8 +61,14 @@ static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
 	win->name = ft_strjoin("fdf ", name);
 	if ((win->x == 0 || win->y == 0) && map)
 	{
-		win->x = m.y * SCALE * 1;
-		win->y = m.x * SCALE * 1;
+		if (m.y < 2)
+			win->x = SCALE * 2;
+		else
+			win->x = (m.y - 1) * SCALE * 2;
+		if (m.x < 2)
+			win->y = SCALE * 2;
+		else
+			win->y = (m.x - 1) * SCALE * 2;
 	}
 	return (1);
 }
@@ -73,7 +82,7 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	t_perp_prms	p;
 
 	print_maps(map, color, m);
-	if (!window_param(map, m, &win, name))
+	if (!window_param(map, m, &win, name))// Зачем эта защита???
 		return (0/*free_maps(map, color, -1)*/);// написать эту ф-цию
 	x.mlx_ptr = mlx_init();
 	x.win_ptr = mlx_new_window(x.mlx_ptr, win.x, win.y, win.name);

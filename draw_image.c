@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 21:42:24 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/27 16:32:56 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 			y = 0;
 			while (y < mlx->m->y)
 			{
-				crd->x[x][y] = v->x - ((mlx->m->x * SCL) / 2) + (y * SCL);
-				crd->y[x][y] = v->y - ((mlx->m->y * SCL) / 2) + (x * SCL);
+				crd->x[x][y] = v->x - (((mlx->m->y - 1) * SCL) / 2) + (y * SCL);
+				crd->y[x][y] = v->y - (((mlx->m->x - 1) * SCL) / 2) + (x * SCL);
 				if (mlx->img->far_prm == 1)
 					crd->far[x][y] = 0;// temporary value
 				y++;
@@ -51,7 +51,7 @@ static void	set_hor_line(t_coords *crd, t_draw_image *draw, \
 	draw->a.y = crd->y[draw->x][draw->y];
 	draw->b.x = crd->x[draw->x][draw->y + 1];
 	draw->b.y = crd->y[draw->x][draw->y + 1];
-	if (v->line_clr < 0)
+	if (v->line_clr < 0 && color[0])
 	{
 		draw->a.color = color[0][draw->x][draw->y];
 		draw->b.color = color[0][draw->x][draw->y + 1];
@@ -68,7 +68,7 @@ static void	set_vert_line(t_coords *crd, t_draw_image *draw, \
 	draw->a.y = crd->y[draw->x][draw->y];
 	draw->b.x = crd->x[draw->x + 1][draw->y];
 	draw->b.y = crd->y[draw->x + 1][draw->y];
-	if (v->line_clr < 0)
+	if (v->line_clr < 0 && color[0])
 	{
 		draw->a.color = color[0][draw->x][draw->y];
 		draw->b.color = color[0][draw->x + 1][draw->y];

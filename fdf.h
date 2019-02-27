@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 21:53:50 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/27 16:34:08 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <fcntl.h>
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
-# define BUF a->buf_str[a->buf_i]
 # define WIN_X 0
 # define WIN_Y 0
 # define SCALE 20
+# define BUF a->buf_str[a->buf_i]
 # define SCL v->scale
 
 
@@ -206,6 +206,7 @@ void	clear_image(t_img_data *img, t_win_prm	*win);
 int		deal_key(int key, void *prm);
 int 	close_window(void *param);
 void	draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color);
+int		get_invers_clr(int color, int ndn);
 //
 void	print_image(t_img_data img, t_win_prm win);//! Убрать это потом!!
 void	print_win_param(t_win_prm *win, t_img_data *img);
