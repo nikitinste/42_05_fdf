@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 18:01:34 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/28 15:50:49 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,30 @@ int close_window(void *prm)
 	mlx_destroy_window (x->mlx_ptr, x->win_ptr);
     exit(0);
     return (0);
+}
+
+int		mouse_press(int key, int x, int y, void *prm)
+{
+	t_mlx_prms	*mlx;
+
+	mlx = (t_mlx_prms*)prm;
+	if (x >= 0 && x < mlx->win->x && y >= 0 && y < mlx->win->y)
+	{
+		if (key == 4)
+		{
+			mlx->v->scale++;
+		}
+		if (key == 5)
+		{
+			if (mlx->v->scale > 2)
+				mlx->v->scale--;
+		}
+		clear_image(mlx->img, mlx->win);
+		mlx_put_image_to_window (mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
+		draw_image(mlx, mlx->v, mlx->map, mlx->color);
+		mlx_put_image_to_window (mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
+	}
+	return (0);
 }
 
 int		deal_key(int key, void *prm)
@@ -59,7 +83,6 @@ int		deal_key(int key, void *prm)
 	clear_image(x->img, x->win);
 	mlx_put_image_to_window (x->mlx_ptr, x->win_ptr, x->img_ptr, 0, 0);
 	draw_image(x, x->v, x->map, x->color);
-	//put_line_to_img(x->img, *x->a, *x->b);
 	mlx_put_image_to_window (x->mlx_ptr, x->win_ptr, x->img_ptr, 0, 0);
 	return (0);
 }

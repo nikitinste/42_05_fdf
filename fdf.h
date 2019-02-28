@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/27 21:38:27 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/28 15:40:16 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ void	put_line_to_img(t_img_data *img, t_pix_prm a, t_pix_prm b);
 int		put_woo_to_img(t_line_prm *l, int x, int y, int color);
 void	clear_image(t_img_data *img, t_win_prm	*win);
 int		deal_key(int key, void *prm);
+int		mouse_press(int key, int x, int y, void *prm);
 int 	close_window(void *param);
 void	draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color);
 int		get_invers_clr(int color, int ndn);
