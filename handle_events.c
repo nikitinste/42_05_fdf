@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/28 17:59:40 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/28 18:31:41 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int		mouse_press(int key, int x, int y, void *prm)
 			else if (mlx->v->scale > 2)
 					mlx->v->scale--;
 		}
-		ft_putnbr(mlx->v->scale);
-		ft_putchar('\n');
+		//ft_putnbr(mlx->v->scale);
+		//ft_putchar('\n');
 		clear_image(mlx->img, mlx->win);
 		mlx_put_image_to_window (mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 		draw_image(mlx, mlx->v, mlx->map, mlx->color);
