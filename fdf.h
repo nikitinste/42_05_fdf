@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/28 15:40:16 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/28 17:27:33 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ struct s_view_prms
 	int				y_ang;
 	int				z_ang;
 	int				scale;
+	int				scl_max;
 	int				x;
 	int				y;
 	int				line_clr;

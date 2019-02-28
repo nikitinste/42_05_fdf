@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/28 15:50:59 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/28 17:48:21 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	clear_image(t_img_data *img, t_win_prm	*win)
 static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 	t_perp_prms *p)
 {
+	unsigned int	i;
+
 	img->b_clr = 0x000000;
 	img->woo_prm = 1;
 	img->far_prm = 0;
@@ -43,6 +45,11 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 		v->scale = SCALE;
 	else
 		v->scale = 10;
+	i = -1;
+	if (x->m->x > x->m->y)
+		v->scl_max = (i / 2) / (x->m->x - 1);
+	else
+		v->scl_max = (i / 2) / (x->m->y - 1);
 	v->x = x->win->x / 2;
 	v->y = x->win->y / 2;
 	v->p = p;
@@ -63,13 +70,17 @@ static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
 	if ((win->x == 0 || win->y == 0) && map)
 	{
 		if (m.y < 2)
-			win->x = SCALE * 2;
+			win->x = SCALE * 4;
 		else
-			win->x = (m.y - 1) * SCALE * 2;
+			win->x = (m.y - 1) * SCALE * 4;
+		if (win->x > 2560)
+			win->x = 2560;
 		if (m.x < 2)
-			win->y = SCALE * 2;
+			win->y = SCALE * 4;
 		else
-			win->y = (m.x - 1) * SCALE * 2;
+			win->y = (m.x - 1) * SCALE * 4;
+		if (win->y > 1395)
+			win->y = 1395;
 	}
 	return (1);
 }

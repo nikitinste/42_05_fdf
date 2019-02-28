@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/28 15:50:49 by uhand            ###   ########.fr       */
+/*   Updated: 2019/02/28 17:59:40 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,25 @@ int		mouse_press(int key, int x, int y, void *prm)
 	mlx = (t_mlx_prms*)prm;
 	if (x >= 0 && x < mlx->win->x && y >= 0 && y < mlx->win->y)
 	{
-		if (key == 4)
-		{
-			mlx->v->scale++;
-		}
 		if (key == 5)
 		{
-			if (mlx->v->scale > 2)
-				mlx->v->scale--;
+			if (mlx->v->scale >= 50)
+			{
+				if (mlx->v->scale < (mlx->v->scl_max + 5))
+					mlx->v->scale += 5;
+			}
+			else if (mlx->v->scale < mlx->v->scl_max)
+					mlx->v->scale++;
 		}
+		if (key == 4)
+		{
+			if (mlx->v->scale > 50)
+					mlx->v->scale -= 5;
+			else if (mlx->v->scale > 2)
+					mlx->v->scale--;
+		}
+		ft_putnbr(mlx->v->scale);
+		ft_putchar('\n');
 		clear_image(mlx->img, mlx->win);
 		mlx_put_image_to_window (mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 		draw_image(mlx, mlx->v, mlx->map, mlx->color);
