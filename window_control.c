@@ -6,11 +6,12 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/01 14:13:44 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/01 20:04:54 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "fdf.h"
+//# include <stdio.h>
 
 void	clear_image(t_img_data *img, t_win_prm	*win)
 {
@@ -39,8 +40,8 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 	x->v = v;
 	v->proj = 0;
 	v->x_ang = 0;
-	v->y_ang = 0;
-	v->z_ang = 0;
+	v->y_ang = 0.5;
+	v->z_ang = 1;
 	if (SCALE > 9 && SCALE < 51)
 		v->scale = SCALE;
 	else
@@ -112,6 +113,8 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	clear_image(x.img, x.win);
 	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);
 	draw_image(&x, &v, map, color);
+	//printf("%f\n", cos(M_PI * v.x_ang));
+	//printf("%f\n", sin(M_PI * v.y_ang));
 	//put_line_to_img(&img, a, b);
 	//print_image(img, win);
 	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);

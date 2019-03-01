@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/01 13:44:06 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/01 17:58:48 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <math.h>
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
 # define WIN_X 0
@@ -120,9 +121,9 @@ typedef struct	s_perp_prms
 struct s_view_prms
 {
 	int				proj;
-	int				x_ang;
-	int				y_ang;
-	int				z_ang;
+	double			x_ang;
+	double			y_ang;
+	double			z_ang;
 	int				scale;
 	int				scl_max;
 	int				x;

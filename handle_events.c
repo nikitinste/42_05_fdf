@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/01 14:16:04 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/01 20:05:32 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ int		mouse_release(int key, int x, int y, void *prm)
 	if (x && y)
 	{
 		if (key == 3)
+		{
 			mlx->v->scr_hold = 0;
-		mlx->mouse->i = 0;
+			mlx->mouse->i = 0;
+		}
 	}
 	return (0);
 }
@@ -103,6 +105,11 @@ int		mouse_press(int key, int x, int y, void *prm)
 	return (0);
 }
 
+/*int		key_release(int key, void *prm)
+{
+	//
+}*/
+
 int		deal_key(int key, void *prm)
 {
 	t_mlx_prms	*x;
@@ -113,6 +120,28 @@ int		deal_key(int key, void *prm)
 		ft_putnbr(key);
 		mlx_destroy_window (x->mlx_ptr, x->win_ptr);
 		exit (0);
+	}
+	if (key == 124)
+	{
+		if (x->v->z_ang <= 1.95)
+			x->v->z_ang += 0.05;
+		if (x->v->z_ang >= 2)
+			x->v->z_ang = 0;
+		/*if (x->v->y_ang < 2)
+			x->v->y_ang += 0.05;
+		if (x->v->y_ang >= 2)
+			x->v->y_ang = 0;*/
+	}
+	if (key == 123)
+	{
+		if ((x->v->z_ang - 0.05) >= 0)
+			x->v->z_ang -= 0.05;
+		if (x->v->z_ang == 0)
+			x->v->z_ang = 1.95;
+		/*if (x->v->y_ang > 0)
+			x->v->y_ang -= 0.05;
+		if (x->v->y_ang == 0)
+			x->v->y_ang = 1.95;*/
 	}
 	/*if (key == 126)
 		x->b->y -= 2;

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/27 21:42:45 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/01 20:38:33 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 			y = 0;
 			while (y < mlx->m->y)
 			{
-				crd->x[x][y] = v->x - (((mlx->m->y - 1) * SCL) / 2) + (y * SCL);
-				crd->y[x][y] = v->y - (((mlx->m->x - 1) * SCL) / 2) + (x * SCL);
+				crd->x[x][y] = (int)(v->x - (((((mlx->m->y - 1) * cos(mlx->v->z_ang) * SCL) / 2) + (y * SCL)) + ((((mlx->m->x - 1) * sin(mlx->v->z_ang) * SCL) / 2) + (x * SCL))));
+				crd->y[x][y] = (int)(v->y - (((((mlx->m->x - 1) * cos(mlx->v->z_ang) * SCL) / 2) + (x * SCL)) - ((((mlx->m->y - 1) * sin(mlx->v->z_ang) * SCL) / 2) + (y * SCL))));
 				if (mlx->img->far_prm == 1)
 					crd->far[x][y] = 0;// temporary value
 				y++;
