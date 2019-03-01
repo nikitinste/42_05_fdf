@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/28 18:31:41 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/01 14:16:04 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,48 @@ int close_window(void *prm)
 	mlx_destroy_window (x->mlx_ptr, x->win_ptr);
     exit(0);
     return (0);
+}
+
+int		mouse_move(int x, int y, void *prm)
+{
+	static t_mouse_crd	mouse;
+	t_mlx_prms			*mlx;
+
+	mlx = (t_mlx_prms*)prm;
+	if (mlx->v->scr_hold == 1 && mouse.i == 0)
+	{
+		mouse.i = 1;
+		mouse.x = x;
+		mouse.y = y;
+		mlx->mouse = &mouse;
+		return (0);
+	}
+	if (mlx->v->scr_hold == 1 && mouse.i == 1)
+	{
+		mlx->v->x += (x - mouse.x);
+		mlx->v->y += (y - mouse.y);
+		mouse.x = x;
+		mouse.y = y;
+		clear_image(mlx->img, mlx->win);
+		mlx_put_image_to_window (mlx->mlx_ptr, WIN, mlx->img_ptr, 0, 0);
+		draw_image(mlx, mlx->v, mlx->map, mlx->color);
+		mlx_put_image_to_window (mlx->mlx_ptr, WIN, mlx->img_ptr, 0, 0);
+	}
+	return (0);
+}
+
+int		mouse_release(int key, int x, int y, void *prm)
+{
+	t_mlx_prms	*mlx;
+
+	mlx = (t_mlx_prms*)prm;
+	if (x && y)
+	{
+		if (key == 3)
+			mlx->v->scr_hold = 0;
+		mlx->mouse->i = 0;
+	}
+	return (0);
 }
 
 int		mouse_press(int key, int x, int y, void *prm)
@@ -46,12 +88,17 @@ int		mouse_press(int key, int x, int y, void *prm)
 			else if (mlx->v->scale > 2)
 					mlx->v->scale--;
 		}
+		if (key == 3)
+		{
+			mlx->v->scr_hold = 1;
+			return (0);
+		}
 		//ft_putnbr(mlx->v->scale);
 		//ft_putchar('\n');
 		clear_image(mlx->img, mlx->win);
-		mlx_put_image_to_window (mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
+		mlx_put_image_to_window (mlx->mlx_ptr, WIN, mlx->img_ptr, 0, 0);
 		draw_image(mlx, mlx->v, mlx->map, mlx->color);
-		mlx_put_image_to_window (mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
+		mlx_put_image_to_window (mlx->mlx_ptr, WIN, mlx->img_ptr, 0, 0);
 	}
 	return (0);
 }

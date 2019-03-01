@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/28 17:27:33 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/01 13:44:06 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define SCALE 20
 # define BUF a->buf_str[a->buf_i]
 # define SCL v->scale
+# define WIN mlx->win_ptr
 
 
 typedef struct	s_view_prms t_view_prms;
@@ -79,6 +80,15 @@ typedef struct	s_pix_prm
 	int				color;
 }				t_pix_prm;
 
+/* Mouse params: mouse */
+
+typedef struct	s_mouse_crd
+{
+	int				i;
+	int				x;
+	int				y;
+}				t_mouse_crd;
+
 /* x */
 
 typedef struct	s_mlx_prms
@@ -92,6 +102,7 @@ typedef struct	s_mlx_prms
 	t_img_data		*img;
 	t_map_prm		*m;
 	t_view_prms		*v;
+	t_mouse_crd		*mouse;
 	int				***map;
 	int				***color;
 }				t_mlx_prms;
@@ -117,6 +128,7 @@ struct s_view_prms
 	int				x;
 	int				y;
 	int				line_clr;
+	int				scr_hold;
 	t_perp_prms		*p;
 	t_img_data		*img;
 
@@ -207,6 +219,8 @@ int		put_woo_to_img(t_line_prm *l, int x, int y, int color);
 void	clear_image(t_img_data *img, t_win_prm	*win);
 int		deal_key(int key, void *prm);
 int		mouse_press(int key, int x, int y, void *prm);
+int		mouse_release(int key, int x, int y, void *prm);
+int		mouse_move(int x, int y, void *prm);
 int 	close_window(void *param);
 void	draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color);
 int		get_invers_clr(int color, int ndn);
