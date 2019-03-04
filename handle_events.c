@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/04 15:28:35 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/04 19:24:19 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int		deal_key(int key, void *prm)
 		mlx_destroy_window (x->mlx_ptr, x->win_ptr);
 		exit (0);
 	}
-	if (key == 124)
+	if (key == 123)
 	{
 		if (z_i <= 71)
 			z_i += 1;
@@ -134,7 +134,7 @@ int		deal_key(int key, void *prm)
 		if (x->v->y_ang >= 2)
 			x->v->y_ang = 0;*/
 	}
-	if (key == 123)
+	if (key == 124)
 	{
 		if (z_i >= 0)
 			z_i -= 1;

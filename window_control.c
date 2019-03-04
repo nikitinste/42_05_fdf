@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/01 20:04:54 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/04 15:36:44 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 	x->v = v;
 	v->proj = 0;
 	v->x_ang = 0;
-	v->y_ang = 0.5;
-	v->z_ang = 1;
+	v->y_ang = 0;
+	v->z_ang = 0;
 	if (SCALE > 9 && SCALE < 51)
 		v->scale = SCALE;
 	else
