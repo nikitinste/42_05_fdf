@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/01 20:05:32 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/04 15:28:35 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int		mouse_press(int key, int x, int y, void *prm)
 int		deal_key(int key, void *prm)
 {
 	t_mlx_prms	*x;
+	static int	z_i;
 
 	x = (t_mlx_prms*)prm;
 	if (key == 53)
@@ -123,10 +124,11 @@ int		deal_key(int key, void *prm)
 	}
 	if (key == 124)
 	{
-		if (x->v->z_ang <= 1.95)
-			x->v->z_ang += 0.05;
-		if (x->v->z_ang >= 2)
-			x->v->z_ang = 0;
+		if (z_i <= 71)
+			z_i += 1;
+		if (z_i >= 72)
+			z_i = 0;
+		x->v->z_ang = (M_PI * z_i) / 36;
 		/*if (x->v->y_ang < 2)
 			x->v->y_ang += 0.05;
 		if (x->v->y_ang >= 2)
@@ -134,10 +136,11 @@ int		deal_key(int key, void *prm)
 	}
 	if (key == 123)
 	{
-		if ((x->v->z_ang - 0.05) >= 0)
-			x->v->z_ang -= 0.05;
-		if (x->v->z_ang == 0)
-			x->v->z_ang = 1.95;
+		if (z_i >= 0)
+			z_i -= 1;
+		if (z_i == -1)
+			z_i = 71;
+		x->v->z_ang = (M_PI * z_i) / 36;
 		/*if (x->v->y_ang > 0)
 			x->v->y_ang -= 0.05;
 		if (x->v->y_ang == 0)
@@ -158,8 +161,8 @@ int		deal_key(int key, void *prm)
 	if (key == 2)
 		x->a->x += 2;
 	if (key == 0)
-		x->a->x -= 2;
-	if (key == 18)*/
+		x->a->x -= 2;*/
+	if (key == 18)
 	{
 		if (x->img->woo_prm == 0)
 			x->img->woo_prm = 1;

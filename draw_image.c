@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/04 14:02:10 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/04 15:30:34 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 {
 	int		x;
 	int		y;
+	int		x_crd;
+	int		y_crd;
+	double	d_zx;
+	double	d_zy;
 
 	x = 0;
 	if (v->proj == 0)
@@ -31,8 +35,16 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 			y = 0;
 			while (y < mlx->m->y)
 			{
-				crd->x[x][y] = (v->x - (((((mlx->m->y - 1) * SCL) / 2) + (x * SCL))));
-				crd->y[x][y] = (v->y - (((((mlx->m->x - 1)  * SCL) / 2) + (y * SCL))));
+				x_crd = (((mlx->m->y - 1) * SCL) / 2) - (y * SCL);
+				y_crd = (((mlx->m->x - 1) * SCL) / 2) - (x * SCL);
+				d_zx = 2 * sqrt(x_crd * x_crd + y_crd * y_crd) \
+				* sin(v->z_ang / 2) * cos(((M_PI + v->z_ang) / 2) \
+				- atan2(y_crd, x_crd));
+				d_zy = 2 * sqrt(x_crd * x_crd + y_crd * y_crd) \
+				* sin(v->z_ang / 2) * sin(((M_PI + v->z_ang) / 2) \
+				- atan2(y_crd, x_crd));
+				crd->x[x][y] = v->x - x_crd - (int)d_zx;
+				crd->y[x][y] = v->y - y_crd - (int)d_zy;
 				if (mlx->img->far_prm == 1)
 					crd->far[x][y] = 0;// temporary value
 				y++;
