@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/04 19:24:19 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/04 20:47:27 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int		deal_key(int key, void *prm)
 {
 	t_mlx_prms	*x;
 	static int	z_i;
+	static int	x_i;
 
 	x = (t_mlx_prms*)prm;
 	if (key == 53)
@@ -145,6 +146,22 @@ int		deal_key(int key, void *prm)
 			x->v->y_ang -= 0.05;
 		if (x->v->y_ang == 0)
 			x->v->y_ang = 1.95;*/
+	}
+	if (key == 125)
+	{
+		if (x_i <= 71)
+			x_i += 1;
+		if (x_i >= 72)
+			x_i = 0;
+		x->v->x_ang = (M_PI * x_i) / 36;
+	}
+	if (key == 126)
+	{
+		if (x_i >= 0)
+			x_i -= 1;
+		if (x_i == -1)
+			x_i = 71;
+		x->v->x_ang = (M_PI * x_i) / 36;
 	}
 	/*if (key == 126)
 		x->b->y -= 2;
