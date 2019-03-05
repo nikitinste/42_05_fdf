@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/01 17:58:48 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/05 16:10:17 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@
 # define BUF a->buf_str[a->buf_i]
 # define SCL v->scale
 # define WIN mlx->win_ptr
-
+# define Z mlx->map[0][x][y]
+# define OX mlx->v->x_ang
+# define OY mlx->v->y_ang
+# define OZ mlx->v->z_ang
 
 typedef struct	s_view_prms t_view_prms;
 
@@ -125,6 +128,7 @@ struct s_view_prms
 	double			y_ang;
 	double			z_ang;
 	int				scale;
+	int				z_scl;
 	int				scl_max;
 	int				x;
 	int				y;

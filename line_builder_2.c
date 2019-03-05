@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:18:05 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/22 17:22:07 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/05 15:37:08 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ static void	get_alpha(t_line_prm *l, t_woo_prm *woo)
 
 	woo->pos = 0;
 	woo->neg = 0;
-	a.remndr = (((ft_abs(l->d_small) * l->i) * 100) / ft_abs(l->d_big)) % 100;
+	if (l->d_small == 0 && l->d_big == 0)
+		a.remndr = 0;
+	else
+		a.remndr = (((ft_abs(l->d_small) * l->i) * 100) / ft_abs(l->d_big)) % 100;
 	if (a.remndr == 0)
 	{
 		woo->origin = 0;

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/04 15:36:44 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/05 19:02:12 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 {
 	unsigned int	i;
 
-	img->b_clr = 0x000000;
+	img->b_clr = 0x555555;
 	img->woo_prm = 1;
 	img->far_prm = 0;
 	x->v = v;
