@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/05 20:18:40 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/06 15:02:34 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 {
 	int		x;
 	int		y;
-	int		x_cr;
-	int		y_cr;
-	int		x_crd;
-	int		y_crd;
+	double	x_cr;
+	double	y_cr;
+	double	z_cr;
+	double	x_crd;
+	double	y_crd;
 
 	x = 0;
 	if (v->proj == 0)
@@ -35,21 +36,23 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 			y = 0;
 			while (y < mlx->m->y)
 			{
-				x_cr = (((mlx->m->x - 1) * SCL) / 2) - (x * SCL);
+				x_cr = (x * SCL) - (((mlx->m->x - 1) * SCL) / 2);
 
-				y_cr = (((mlx->m->y - 1) * SCL) / 2) - (y * SCL);
+				y_cr = (y * SCL) - (((mlx->m->y - 1) * SCL) / 2);
 
-				x_crd =  /*- (Z * SCL * cos((3 * M_PI / 2) - OX)) - (x_cr * sin(OX)) - (Z * SCL * sin(OY)) - (y_cr * cos(OY))*/ + (x_cr * sin(OZ)) + (y_cr * cos(OZ - M_PI));
+				z_cr = Z * SCL;
 
-				y_crd = (Z * SCL * sin(OX)) + (x_cr * cos(M_PI / 2 - OX))/* + (Z * SCL * cos(OY)) - (y_cr * sin(OY))*/ + (x_cr * cos(OZ - M_PI)) + (y_cr * sin(OZ - M_PI));
+				x_crd = x_cr * cos(OZ + M_PI / 2) * sin(OY) + y_cr * cos(OX + M_PI / 2) * sin(OZ + M_PI / 2)	+ z_cr * sin(OX + M_PI / 2) * cos(OY);
+
+				y_crd = x_cr * cos(OZ) * sin(OY + M_PI / 2) + y_cr * cos(OX) *sin(OZ)							+ z_cr * sin(OX) * cos(OY + M_PI / 2);
 
 				/*x_crd = - (y_cr * cos(mlx->v->y_ang)) + x_cr * sin(mlx->v->z_ang) ;*/
 
 				/*y_crd = (Z * SCL * sin(mlx->v->x_ang)) + x_cr * cos(mlx->v->x_ang);*/
 
-				crd->x[x][y] = v->x + x_crd;
+				crd->x[x][y] = (double)v->x + x_crd;
 
-				crd->y[x][y] = v->y + y_crd;
+				crd->y[x][y] = (double)v->y + y_crd;
 
 				if (mlx->img->far_prm == 1)
 					crd->far[x][y] = 0;// temporary value

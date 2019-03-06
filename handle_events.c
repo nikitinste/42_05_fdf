@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/05 20:11:55 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/06 13:14:13 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int		deal_key(int key, void *prm)
 		x->v->z_ang = (M_PI * z_i) / 36;
 		printf("OZ %f %d\n", x->v->z_ang, z_i);
 	}
-	if (key == 125)
+	if (key == 83)
 	{
 		if (x_i <= 71)
 			x_i += 1;
@@ -152,7 +152,7 @@ int		deal_key(int key, void *prm)
 		x->v->x_ang = (M_PI * x_i) / 36;
 		printf("OX %f %d\n", x->v->x_ang, x_i);
 	}
-	if (key == 126)
+	if (key == 86)
 	{
 		if (x_i >= 0)
 			x_i -= 1;
@@ -161,21 +161,23 @@ int		deal_key(int key, void *prm)
 		x->v->x_ang = (M_PI * x_i) / 36;
 		printf("OX %f %d\n", x->v->x_ang, x_i);
 	}
-	if (key == 83)
+	if (key == 125)
 	{
 		if (y_i <= 71)
 			y_i += 1;
 		if (y_i >= 72)
 			y_i = 0;
 		x->v->y_ang = (M_PI * y_i) / 36;
+		printf("OY %f %d\n", x->v->y_ang, x_i);
 	}
-	if (key == 86)
+	if (key == 126)
 	{
 		if (y_i >= 0)
 			y_i -= 1;
 		if (y_i == -1)
 			y_i = 71;
 		x->v->y_ang = (M_PI * y_i) / 36;
+		printf("OY %f %d\n", x->v->y_ang, x_i);
 	}
 	if (key == 18)
 	{
