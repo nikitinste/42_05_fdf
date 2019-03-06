@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/06 15:02:34 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/06 18:41:31 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,9 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 
 				z_cr = Z * SCL;
 
-				x_crd = x_cr * cos(OZ + M_PI / 2) * sin(OY) + y_cr * cos(OX + M_PI / 2) * sin(OZ + M_PI / 2)	+ z_cr * sin(OX + M_PI / 2) * cos(OY);
+				x_crd = x_cr * cos(OZ + M_PI / 2) * sin(OY + M_PI / 2) + y_cr * sin(OZ + M_PI / 2) * cos(OX) 	+ z_cr * cos(OY + M_PI / 2) * sin(OX);
 
-				y_crd = x_cr * cos(OZ) * sin(OY + M_PI / 2) + y_cr * cos(OX) *sin(OZ)							+ z_cr * sin(OX) * cos(OY + M_PI / 2);
-
-				/*x_crd = - (y_cr * cos(mlx->v->y_ang)) + x_cr * sin(mlx->v->z_ang) ;*/
-
-				/*y_crd = (Z * SCL * sin(mlx->v->x_ang)) + x_cr * cos(mlx->v->x_ang);*/
+				y_crd = x_cr * cos(OZ) 			  * sin(OY + M_PI / 2) + y_cr * sin(OZ)			   * cos(OX) 	+ z_cr * cos(OY + M_PI / 2)	* sin(OX);
 
 				crd->x[x][y] = (double)v->x + x_crd;
 

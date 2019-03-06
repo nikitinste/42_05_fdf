@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/06 13:14:13 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/06 16:08:18 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,24 +125,6 @@ int		deal_key(int key, void *prm)
 		mlx_destroy_window (x->mlx_ptr, x->win_ptr);
 		exit (0);
 	}
-	if (key == 123)
-	{
-		if (z_i <= 71)
-			z_i += 1;
-		if (z_i >= 72)
-			z_i = 0;
-		x->v->z_ang = (M_PI * z_i) / 36;
-		printf("OZ %f %d\n", x->v->z_ang, z_i);
-	}
-	if (key == 124)
-	{
-		if (z_i >= 0)
-			z_i -= 1;
-		if (z_i == -1)
-			z_i = 71;
-		x->v->z_ang = (M_PI * z_i) / 36;
-		printf("OZ %f %d\n", x->v->z_ang, z_i);
-	}
 	if (key == 83)
 	{
 		if (x_i <= 71)
@@ -168,7 +150,7 @@ int		deal_key(int key, void *prm)
 		if (y_i >= 72)
 			y_i = 0;
 		x->v->y_ang = (M_PI * y_i) / 36;
-		printf("OY %f %d\n", x->v->y_ang, x_i);
+		printf("OY %f %d\n", x->v->y_ang, y_i);
 	}
 	if (key == 126)
 	{
@@ -177,7 +159,26 @@ int		deal_key(int key, void *prm)
 		if (y_i == -1)
 			y_i = 71;
 		x->v->y_ang = (M_PI * y_i) / 36;
-		printf("OY %f %d\n", x->v->y_ang, x_i);
+		printf("OY %f %d\n", x->v->y_ang, y_i);
+	}
+
+	if (key == 123)
+	{
+		if (z_i <= 71)
+			z_i += 1;
+		if (z_i >= 72)
+			z_i = 0;
+		x->v->z_ang = (M_PI * z_i) / 36;
+		printf("OZ %f %d\n", x->v->z_ang, z_i);
+	}
+	if (key == 124)
+	{
+		if (z_i >= 0)
+			z_i -= 1;
+		if (z_i == -1)
+			z_i = 71;
+		x->v->z_ang = (M_PI * z_i) / 36;
+		printf("OZ %f %d\n", x->v->z_ang, z_i);
 	}
 	if (key == 18)
 	{
