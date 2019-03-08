@@ -125,7 +125,7 @@ int		deal_key(int key, void *prm)
 		mlx_destroy_window (x->mlx_ptr, x->win_ptr);
 		exit (0);
 	}
-	if (key == 83)
+	if (key == 6)
 	{
 		if (x_i <= 71)
 			x_i += 1;
@@ -134,7 +134,7 @@ int		deal_key(int key, void *prm)
 		x->v->x_ang = (M_PI * x_i) / 36;
 		printf("OX %f %d\n", x->v->x_ang, x_i);
 	}
-	if (key == 86)
+	if (key == 0)
 	{
 		if (x_i >= 0)
 			x_i -= 1;

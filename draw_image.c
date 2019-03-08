@@ -27,6 +27,7 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 	double	z_cr;
 	double	x_crd;
 	double	y_crd;
+	double	z_crd;
 
 	x = 0;
 	if (v->proj == 0)
@@ -42,23 +43,29 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 
 				z_cr = Z * SCL;
 
-				z_cr = z_cr * cos(OX) + x_cr * sin(OX);
-				x_cr = z_cr * (-sin(OX)) + x_cr * cos(OX);
+				z_crd = z_cr * cos(OX) + x_cr * sin(OX);
+				x_crd = z_cr * (-sin(OX)) + x_cr * cos(OX);
+				y_crd = y_cr;
 
-				y_cr = y_cr * cos(OY) + x_cr * sin(OY);
-				x_cr = y_cr * (-sin(OY)) + x_cr * cos(OY);
+				x_cr = x_crd;
+				y_cr = y_crd;
+				z_cr = z_crd;
 
-				y_cr = y_cr * cos(OZ) - z_cr * sin(OZ);
-				z_cr = (-y_cr) * sin(OZ) + z_cr * cos(OZ);
+				y_crd = y_cr * cos(OY) + x_cr * sin(OY);
+				x_crd = y_cr * (-sin(OY)) + x_cr * cos(OY);
+				z_crd = z_cr;
 
+				x_cr = x_crd;
+				y_cr = y_crd;
+				z_cr = z_crd;
 
+				y_crd = y_cr * cos(OZ) - z_cr * sin(OZ);
+				z_crd = (-y_cr) * sin(OZ) + z_cr * cos(OZ);
 				x_crd = x_cr;
-
-				y_crd = -z_cr;
 
 				crd->x[x][y] = (double)v->x + x_crd;
 
-				crd->y[x][y] = (double)v->y + y_crd;
+				crd->y[x][y] = (double)v->y - z_crd;
 
 				if (mlx->img->far_prm == 1)
 					crd->far[x][y] = 0;// temporary value
