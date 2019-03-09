@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/06 16:08:18 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/09 17:44:39 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,42 @@ int		deal_key(int key, void *prm)
 			z_i = 71;
 		x->v->z_ang = (M_PI * z_i) / 36;
 		printf("OZ %f %d\n", x->v->z_ang, z_i);
+	}
+	if (key == 17)
+	{
+		x->v->x_ang = 0;
+		x->v->y_ang = 0;
+		x->v->z_ang = 0;
+		x_i = 0;
+		y_i = 0;
+		z_i = 0;
+	}
+	if (key == 3)
+	{
+		x_i = 54;
+		y_i = 0;
+		z_i = 0;
+		x->v->x_ang = (M_PI * x_i) / 36;
+		x->v->y_ang = 0;
+		x->v->z_ang = 0;
+	}
+	if (key == 37)
+	{
+		x_i = 54;
+		y_i = 54;
+		z_i = 0;
+		x->v->x_ang = (M_PI * x_i) / 36;
+		x->v->y_ang = (M_PI * y_i) / 36;
+		x->v->z_ang = 0;
+	}
+	if (key == 34)
+	{
+		x_i = 63;
+		y_i = 0;
+		z_i = 9;
+		x->v->x_ang = (M_PI * x_i) / 36;
+		x->v->y_ang = 0;
+		x->v->z_ang = (M_PI * z_i) / 36;
 	}
 	if (key == 18)
 	{

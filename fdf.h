@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/05 16:10:17 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/09 16:50:42 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define BUF a->buf_str[a->buf_i]
 # define SCL v->scale
 # define WIN mlx->win_ptr
-# define Z mlx->map[0][x][y]
+//# define Z mlx->map[0][x][y]
 # define OX mlx->v->x_ang
 # define OY mlx->v->y_ang
 # define OZ mlx->v->z_ang
@@ -149,6 +149,20 @@ typedef struct	s_coords
 	int				***map;
 	int				***color;
 }				t_coords;
+
+/* Window coords */
+
+typedef struct	s_coord_map
+{
+	int		x;
+	int		y;
+	double	x_cr;
+	double	y_cr;
+	double	z_cr;
+	double	x_crd;
+	double	y_crd;
+	double	z_crd;
+}				t_coord_map;
 
 /* Operational draw image params: draw */
 

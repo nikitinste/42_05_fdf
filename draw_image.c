@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/09 14:42:12 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/09 16:54:14 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,56 +18,44 @@ static void get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 		return ;
 }
 
+static void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
+	t_coord_map *i)
+{
+	i->x_cr = (i->x * SCL) - (((mlx->m->x - 1) * SCL) / 2);
+	i->y_cr = (i->y * SCL) - (((mlx->m->y - 1) * SCL) / 2);
+	i->z_cr = mlx->map[0][i->x][i->y] * SCL;
+	i->x_crd = i->x_cr * sin(OZ) + i->y_cr * cos(OZ);
+	i->y_crd = i->x_cr * cos(OZ) - i->y_cr * sin(OZ);
+	i->x_cr = i->x_crd;
+	i->y_cr = i->y_crd;
+	i->y_crd = i->y_cr * cos(OX) + i->z_cr * sin(OX);
+	i->z_crd = i->z_cr * cos(OX) - i->y_cr * sin(OX);
+	i->y_cr = i->y_crd;
+	i->z_cr = i->z_crd;
+	i->x_crd = i->x_cr * cos(OY) - i->z_cr * sin(OY);
+	i->z_crd = i->x_cr * sin(OY) + i->z_cr * cos(OY);
+	crd->x[i->x][i->y] = (double)v->x + i->x_crd;
+	crd->y[i->x][i->y] = (double)v->y + i->y_crd;
+	if (mlx->img->far_prm == 1)
+		crd->far[i->x][i->y] = i->z_crd;
+}
+
 static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 {
-	int		x;
-	int		y;
-	double	x_cr;
-	double	y_cr;
-	double	z_cr;
-	double	x_crd;
-	double	y_crd;
-	double	z_crd;
+	t_coord_map	i;
 
-	x = 0;
+	i.x = 0;
 	if (v->proj == 0)
 	{
-		while (x < mlx->m->x)
+		while (i.x < mlx->m->x)
 		{
-			y = 0;
-			while (y < mlx->m->y)
+			i.y = 0;
+			while (i.y < mlx->m->y)
 			{
-				x_cr = (x * SCL) - (((mlx->m->x - 1) * SCL) / 2);
-
-				y_cr = (y * SCL) - (((mlx->m->y - 1) * SCL) / 2);
-
-				z_cr = Z * SCL;
-
-				x_crd = x_cr * sin(OZ) + y_cr * cos(OZ);
-				y_crd = x_cr * cos(OZ) - y_cr * sin(OZ);
-				z_crd = z_cr;
-
-				x_cr = x_crd;
-				y_cr = y_crd;
-
-				y_crd = y_cr * cos(OX) + z_cr * sin(OX);
-				z_crd = z_cr * cos(OX) - y_cr * sin(OX);
-
-				y_cr = y_crd;
-				z_cr = z_crd;
-
-				x_crd = x_cr * cos(OY) - z_cr * sin(OY);
-				z_crd = x_cr * sin(OY) + z_cr * cos(OY);
-
-				crd->x[x][y] = (double)v->x + x_crd;
-
-				crd->y[x][y] = (double)v->y + y_crd;
-
-				if (mlx->img->far_prm == 1)
-					crd->far[x][y] = 0;// temporary value
-				y++;
+				get_magic(mlx, v, crd, &i);
+				i.y++;
 			}
-			x++;
+			i.x++;
 		}
 	}
 	else
