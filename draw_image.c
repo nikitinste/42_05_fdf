@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/08 15:08:04 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/09 14:42:12 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,18 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 				x_cr = x_crd;
 				y_cr = y_crd;
 
-				x_crd = x_cr * sin(OY) - z_cr * cos(OY);
-				y_crd = x_cr * cos(OY) + z_cr * sin(OY);
-				z_crd = x_cr * sin(OY) - z_cr * cos(OY);
+				y_crd = y_cr * cos(OX) + z_cr * sin(OX);
+				z_crd = z_cr * cos(OX) - y_cr * sin(OX);
 
-				x_cr = x_crd;
 				y_cr = y_crd;
 				z_cr = z_crd;
 
-				x_crd = y_cr * cos(OX) - z_cr * sin(OX);
-				y_crd = (-y_cr) * sin(OX) - z_cr * cos(OX);
-				z_crd = - y_cr * sin(OX) - z_cr * cos(OX);
+				x_crd = x_cr * cos(OY) - z_cr * sin(OY);
+				z_crd = x_cr * sin(OY) + z_cr * cos(OY);
 
-				crd->x[x][y] = (double)v->x + y_crd;
+				crd->x[x][y] = (double)v->x + x_crd;
 
-				crd->y[x][y] = (double)v->y + x_crd;
+				crd->y[x][y] = (double)v->y + y_crd;
 
 				if (mlx->img->far_prm == 1)
 					crd->far[x][y] = 0;// temporary value
