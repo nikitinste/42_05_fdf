@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:18:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/28 18:41:33 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/09 15:36:04 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void			put_line_to_img(t_img_data *img, t_pix_prm a, t_pix_prm b)
 	t_grad_prms		clr;
 	int				(*method)(t_line_prm*, int, int, int);
 
+	if (a.x == b.x && a.y == b.y)
+		return ;
 	if (img->woo_prm == 0)
 		method = &put_pix_to_img;
 	if (img->woo_prm == 1)
