@@ -6,39 +6,11 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/10 15:59:13 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/10 20:27:20 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "fdf.h"
-
-static void get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
-{
-	if (mlx && v && crd)
-		return ;
-}
-
-static void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
-	t_coord_map *i)
-{
-	i->x_cr = (i->y * SCL) - (((mlx->m->y - 1) * SCL) / 2);
-	i->y_cr = (i->x * SCL) - (((mlx->m->x - 1) * SCL) / 2);
-	i->z_cr = mlx->map[0][i->x][i->y] * SCL;
-	i->x_crd = i->x_cr * cos(OZ) + i->y_cr * sin(OZ);
-	i->y_crd = - i->x_cr * sin(OZ) + i->y_cr * cos(OZ);
-	i->x_cr = i->x_crd;
-	i->y_cr = i->y_crd;	
-	i->y_crd = i->y_cr * cos(OX) + i->z_cr * sin(OX);
-	i->z_crd = i->z_cr * cos(OX) - i->y_cr * sin(OX);
-	i->y_cr = i->y_crd;
-	i->z_cr = i->z_crd;
-	i->x_crd = i->x_cr * cos(OY) - i->z_cr * sin(OY);
-	i->z_crd = i->x_cr * sin(OY) + i->z_cr * cos(OY);
-	crd->x[i->x][i->y] = v->x + i->x_crd;
-	crd->y[i->x][i->y] = v->y + i->y_crd;
-	if (mlx->img->far_prm == 1)
-		crd->far[i->x][i->y] = i->z_crd;
-}
 
 static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 {
@@ -108,7 +80,36 @@ static void	set_vert_line(t_coords *crd, t_draw_image *draw, \
 	}
 }
 
-void	draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color)
+/* Написать проверку координат за пределами окна */
+
+static void	get_lines(t_mlx_prms *mlx, t_coords	*crd, t_draw_image *draw)
+{
+	draw->x = 0;
+	while (draw->x < (mlx->m->x - 1))
+	{
+		draw->y = 0;
+		while (draw->y < (mlx->m->y - 1))
+		{
+			set_hor_line(crd, draw, mlx->v, mlx->color);
+			put_line_to_img(mlx->img, draw->a, draw->b);
+			set_vert_line(crd, draw, mlx->v, mlx->color);
+			put_line_to_img(mlx->img, draw->a, draw->b);
+			draw->y++;
+		}
+		set_vert_line(crd, draw, mlx->v, mlx->color);
+		put_line_to_img(mlx->img, draw->a, draw->b);
+		draw->x++;
+	}
+	draw->y = 0;
+	while (draw->y < (mlx->m->y - 1))
+	{
+		set_hor_line(crd, draw, mlx->v, mlx->color);
+		put_line_to_img(mlx->img, draw->a, draw->b);
+		draw->y++;
+	}
+}
+
+void		draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color)
 {
 	static t_coords	crd;
 	t_draw_image	draw;
@@ -123,27 +124,5 @@ void	draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color)
 	crd.map = map;
 	crd.color = color;
 	get_coord_map(mlx, v, &crd);
-	draw.x = 0;
-	while (draw.x < (mlx->m->x - 1))
-	{
-		draw.y = 0;
-		while (draw.y < (mlx->m->y - 1))
-		{
-			set_hor_line(&crd, &draw, v, color);
-			put_line_to_img(mlx->img, draw.a, draw.b);
-			set_vert_line(&crd, &draw, v, color);
-			put_line_to_img(mlx->img, draw.a, draw.b);
-			draw.y++;
-		}
-		set_vert_line(&crd, &draw, v, color);
-		put_line_to_img(mlx->img, draw.a, draw.b);
-		draw.x++;
-	}
-	draw.y = 0;
-	while (draw.y < (mlx->m->y - 1))
-	{
-		set_hor_line(&crd, &draw, v, color);
-		put_line_to_img(mlx->img, draw.a, draw.b);
-		draw.y++;
-	}
+	get_lines(mlx, &crd, &draw);
 }

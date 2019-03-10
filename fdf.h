@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/10 17:31:56 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/10 20:08:49 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,13 @@ typedef struct	s_mouse_crd
 	int				y;
 }				t_mouse_crd;
 
-/* x */
+/* x || mlx */
 
 typedef struct	s_mlx_prms
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
-	/*t_pix_prm		*a;
-	t_pix_prm		*b;*/
 	t_win_prm		*win;
 	t_img_data		*img;
 	t_map_prm		*m;
@@ -250,6 +248,18 @@ void	draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color);
 int		get_invers_clr(int color, int ndn);
 void	bump_up(double *angle, int *i, int a);
 void	bump_down(double *angle, int *i, int a);
+void	renew_window(t_mlx_prms *mlx);
+int		mouse_scroll(t_mlx_prms *mlx, t_mouse_crd *scroll, int x, int y);
+int		mouse_button(t_mlx_prms *mlx, t_mouse_crd *mouse, int x, int y);
+void	mouse_scale(int key, t_mlx_prms	*mlx);
+void	bump_up(double *angle, int *i, int a);
+void	bump_down(double *angle, int *i, int a);
+void	left_iso(int key, t_mlx_prms	*x);
+void	top_front(int key, t_mlx_prms	*x);
+void	map_rotation(int key, t_mlx_prms	*x);
+void get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd);
+void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
+	t_coord_map *i);
 //
 void	print_image(t_img_data img, t_win_prm win);//! Убрать это потом!!
 void	print_win_param(t_win_prm *win, t_img_data *img);

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/10 16:46:52 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/10 20:27:39 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
 			win->y = 1395;
 	}
 	return (1);
-	//
-	//
 }
 
 int			window_control(int ***map, int ***color, t_map_prm m, char *name)
