@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/09 16:50:42 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/10 17:31:56 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,13 @@ typedef struct	s_mlx_prms
 	t_img_data		*img;
 	t_map_prm		*m;
 	t_view_prms		*v;
+	t_mouse_crd		*scroll;
 	t_mouse_crd		*mouse;
 	int				***map;
 	int				***color;
+	int				x_i;
+	int				y_i;
+	int				z_i;
 }				t_mlx_prms;
 
 /* Perspective prms: p */
@@ -134,6 +138,7 @@ struct s_view_prms
 	int				y;
 	int				line_clr;
 	int				scr_hold;
+	int				mouse_hld;
 	t_perp_prms		*p;
 	t_img_data		*img;
 
@@ -243,6 +248,8 @@ int		mouse_move(int x, int y, void *prm);
 int 	close_window(void *param);
 void	draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color);
 int		get_invers_clr(int color, int ndn);
+void	bump_up(double *angle, int *i, int a);
+void	bump_down(double *angle, int *i, int a);
 //
 void	print_image(t_img_data img, t_win_prm win);//! Убрать это потом!!
 void	print_win_param(t_win_prm *win, t_img_data *img);

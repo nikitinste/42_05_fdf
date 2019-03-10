@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/09 17:44:39 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/10 18:03:45 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,43 @@ int close_window(void *prm)
     return (0);
 }
 
+void	mouse_scroll()
+{
+	//
+}
+
+void	mouse_button()
+{
+	//
+}
+
 int		mouse_move(int x, int y, void *prm)
 {
+	static t_mouse_crd	scroll;
 	static t_mouse_crd	mouse;
 	t_mlx_prms			*mlx;
 
 	mlx = (t_mlx_prms*)prm;
-	if (mlx->v->scr_hold == 1 && mouse.i == 0)
+	if (mlx->v->scr_hold == 1 && scroll.i == 0)
+	{
+		scroll.i = 1;
+		scroll.x = x;
+		scroll.y = y;
+		mlx->scroll = &scroll;
+		return (0);
+	}
+	if (mlx->v->scr_hold == 1 && scroll.i == 1)
+	{
+		mlx->v->x += (x - scroll.x);
+		mlx->v->y += (y - scroll.y);
+		scroll.x = x;
+		scroll.y = y;
+		clear_image(mlx->img, mlx->win);
+		mlx_put_image_to_window (mlx->mlx_ptr, WIN, mlx->img_ptr, 0, 0);
+		draw_image(mlx, mlx->v, mlx->map, mlx->color);
+		mlx_put_image_to_window (mlx->mlx_ptr, WIN, mlx->img_ptr, 0, 0);
+	}
+	if (mlx->v->mouse_hld == 1 && mouse.i == 0)
 	{
 		mouse.i = 1;
 		mouse.x = x;
@@ -37,10 +67,16 @@ int		mouse_move(int x, int y, void *prm)
 		mlx->mouse = &mouse;
 		return (0);
 	}
-	if (mlx->v->scr_hold == 1 && mouse.i == 1)
+	if (mlx->v->mouse_hld == 1 && mouse.i == 1)
 	{
-		mlx->v->x += (x - mouse.x);
-		mlx->v->y += (y - mouse.y);
+		if ((x - mouse.x) > 0)
+			bump_down(&(mlx->v->y_ang), &(mlx->y_i), 3);
+		else if((x - mouse.x) < 0)
+			bump_up(&(mlx->v->y_ang), &(mlx->y_i), 3);
+		if ((y - mouse.y) > 0)
+			bump_up(&(mlx->v->x_ang), &(mlx->x_i), 3);
+		else if((y - mouse.y) < 0)
+			bump_down(&(mlx->v->x_ang), &(mlx->x_i), 3);
 		mouse.x = x;
 		mouse.y = y;
 		clear_image(mlx->img, mlx->win);
@@ -61,6 +97,11 @@ int		mouse_release(int key, int x, int y, void *prm)
 		if (key == 3)
 		{
 			mlx->v->scr_hold = 0;
+			mlx->scroll->i = 0;
+		}
+		if (key == 1)
+		{
+			mlx->v->mouse_hld = 0;
 			mlx->mouse->i = 0;
 		}
 	}
@@ -96,6 +137,11 @@ int		mouse_press(int key, int x, int y, void *prm)
 			mlx->v->scr_hold = 1;
 			return (0);
 		}
+		if (key == 1)
+		{
+			mlx->v->mouse_hld = 1;
+			return (0);
+		}
 		//ft_putnbr(mlx->v->scale);
 		//ft_putchar('\n');
 		clear_image(mlx->img, mlx->win);
@@ -106,17 +152,28 @@ int		mouse_press(int key, int x, int y, void *prm)
 	return (0);
 }
 
-/*int		key_release(int key, void *prm)
+void	bump_up(double *angle, int *i, int a)
 {
-	//
-}*/
+	if (*i <= (360 - a))
+		*i = *i + a;
+	if (*i >= 360)
+		*i = 0;
+	*angle = (M_PI * *i) / 180;
+}
+
+void	bump_down(double *angle, int *i, int a)
+{
+	if (*i >= 0)
+		*i = *i - a;
+	if (*i == -a)
+		*i = 360 - a;
+	*angle = (M_PI * *i) / 180;
+}
 
 int		deal_key(int key, void *prm)
 {
 	t_mlx_prms	*x;
-	static int	x_i;
-	static int	y_i;
-	static int	z_i;
+
 
 	x = (t_mlx_prms*)prm;
 	if (key == 53)
@@ -126,95 +183,51 @@ int		deal_key(int key, void *prm)
 		exit (0);
 	}
 	if (key == 6)
-	{
-		if (x_i <= 71)
-			x_i += 1;
-		if (x_i >= 72)
-			x_i = 0;
-		x->v->x_ang = (M_PI * x_i) / 36;
-		printf("OX %f %d\n", x->v->x_ang, x_i);
-	}
+		bump_up(&(x->v->x_ang), &(x->x_i), 5);
 	if (key == 0)
-	{
-		if (x_i >= 0)
-			x_i -= 1;
-		if (x_i == -1)
-			x_i = 71;
-		x->v->x_ang = (M_PI * x_i) / 36;
-		printf("OX %f %d\n", x->v->x_ang, x_i);
-	}
+		bump_down(&(x->v->x_ang), &(x->x_i), 5);
 	if (key == 125)
-	{
-		if (y_i <= 71)
-			y_i += 1;
-		if (y_i >= 72)
-			y_i = 0;
-		x->v->y_ang = (M_PI * y_i) / 36;
-		printf("OY %f %d\n", x->v->y_ang, y_i);
-	}
+		bump_up(&(x->v->y_ang), &(x->y_i), 5);
 	if (key == 126)
-	{
-		if (y_i >= 0)
-			y_i -= 1;
-		if (y_i == -1)
-			y_i = 71;
-		x->v->y_ang = (M_PI * y_i) / 36;
-		printf("OY %f %d\n", x->v->y_ang, y_i);
-	}
-
+		bump_down(&(x->v->y_ang), &(x->y_i), 5);
 	if (key == 123)
-	{
-		if (z_i <= 71)
-			z_i += 1;
-		if (z_i >= 72)
-			z_i = 0;
-		x->v->z_ang = (M_PI * z_i) / 36;
-		printf("OZ %f %d\n", x->v->z_ang, z_i);
-	}
+		bump_up(&(x->v->z_ang), &(x->z_i), 5);
 	if (key == 124)
-	{
-		if (z_i >= 0)
-			z_i -= 1;
-		if (z_i == -1)
-			z_i = 71;
-		x->v->z_ang = (M_PI * z_i) / 36;
-		printf("OZ %f %d\n", x->v->z_ang, z_i);
-	}
+		bump_down(&(x->v->z_ang), &(x->z_i), 5);
 	if (key == 17)
 	{
 		x->v->x_ang = 0;
 		x->v->y_ang = 0;
 		x->v->z_ang = 0;
-		x_i = 0;
-		y_i = 0;
-		z_i = 0;
+		x->x_i = 0;
+		x->y_i = 0;
+		x->z_i = 0;
 	}
 	if (key == 3)
 	{
-		x_i = 54;
-		y_i = 0;
-		z_i = 0;
-		x->v->x_ang = (M_PI * x_i) / 36;
+		x->x_i = 270;
+		x->y_i = 0;
+		x->z_i = 0;
+		x->v->x_ang = (M_PI * x->x_i) / 180;
 		x->v->y_ang = 0;
 		x->v->z_ang = 0;
 	}
 	if (key == 37)
 	{
-		x_i = 54;
-		y_i = 54;
-		z_i = 0;
-		x->v->x_ang = (M_PI * x_i) / 36;
-		x->v->y_ang = (M_PI * y_i) / 36;
+		x->x_i = 270;
+		x->y_i = 270;
+		x->z_i = 0;
+		x->v->x_ang = (M_PI * x->x_i) / 180;
+		x->v->y_ang = (M_PI * x->y_i) / 180;
 		x->v->z_ang = 0;
 	}
 	if (key == 34)
 	{
-		x_i = 63;
-		y_i = 0;
-		z_i = 9;
-		x->v->x_ang = (M_PI * x_i) / 36;
+		x->x_i = 315;
+		x->y_i = 0;
+		x->v->x_ang = (M_PI * x->x_i) / 180;
 		x->v->y_ang = 0;
-		x->v->z_ang = (M_PI * z_i) / 36;
+		x->v->z_ang = (M_PI * x->z_i) / 180;
 	}
 	if (key == 18)
 	{
