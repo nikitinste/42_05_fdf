@@ -43,6 +43,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
+	/bin/rm -f libft.h.gch
 
 $(OBJ): $(SRC) $(HEAD)
 	gcc -c $(SRC) $(HEAD) $(FLAGS)

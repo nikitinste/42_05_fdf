@@ -6,11 +6,11 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 16:18:05 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/11 13:28:56 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/11 15:29:39 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
+#include "fdf.h"
 
 static int	get_woo_color(t_line_prm *l, int color, int alpha_i)
 {
@@ -36,29 +36,29 @@ static void	get_alpha(t_line_prm *l, t_woo_prm *woo)
 	woo->pos = 0;
 	woo->neg = 0;
 	if (l->d_small == 0 && l->d_big == 0)
-		a.remndr = 0;
+		a.rem = 0;
 	else
-		a.remndr = (((ft_abs(l->d_small) * l->i) * 100) / ft_abs(l->d_big)) % 100;
-	if (a.remndr == 0)
+		a.rem = (((ft_abs(l->d_small) * l->i) * 100) / ft_abs(l->d_big)) % 100;
+	if (a.rem == 0)
 	{
 		woo->origin = 0;
 		return ;
 	}
-	if (a.remndr > 50)
+	if (a.rem > 50)
 	{
-		woo->origin = 100 - a.remndr;
+		woo->origin = 100 - a.rem;
 		woo->neg = 100 - woo->origin;
 		return ;
 	}
-	if (a.remndr <= 50)
+	if (a.rem <= 50)
 	{
-		woo->origin = a.remndr;
+		woo->origin = a.rem;
 		woo->pos = 100 - woo->origin;
 		return ;
 	}
 }
 
-static int woo_ndn_1(t_line_prm *l, t_woo_prm *woo, int color)
+static int	woo_ndn_1(t_line_prm *l, t_woo_prm *woo, int color)
 {
 	get_alpha(l, woo);
 	if (woo->origin == 0)
@@ -78,7 +78,7 @@ static int woo_ndn_1(t_line_prm *l, t_woo_prm *woo, int color)
 	return (0);
 }
 
-static int woo_ndn_0(t_line_prm *l, t_woo_prm *woo, int color)
+static int	woo_ndn_0(t_line_prm *l, t_woo_prm *woo, int color)
 {
 	get_alpha(l, woo);
 	if (woo->origin == 0)
@@ -104,7 +104,7 @@ int			put_woo_to_img(t_line_prm *l, int x, int y, int color)
 
 	woo.sign = 1;
 	if (l->d_small < 0)
-		woo.sign = - 1;
+		woo.sign = -1;
 	woo.x = x;
 	woo.y = y;
 	if (l->d_ind == 1)

@@ -6,11 +6,11 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/10 20:27:20 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/11 14:41:30 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
+#include "fdf.h"
 
 static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 {
@@ -80,9 +80,7 @@ static void	set_vert_line(t_coords *crd, t_draw_image *draw, \
 	}
 }
 
-/* Написать проверку координат за пределами окна */
-
-static void	get_lines(t_mlx_prms *mlx, t_coords	*crd, t_draw_image *draw)
+static void	get_lines(t_mlx_prms *mlx, t_coords *crd, t_draw_image *draw)
 {
 	draw->x = 0;
 	while (draw->x < (mlx->m->x - 1))
@@ -109,7 +107,8 @@ static void	get_lines(t_mlx_prms *mlx, t_coords	*crd, t_draw_image *draw)
 	}
 }
 
-void		draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color)
+void		draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map,\
+	int ***color)
 {
 	static t_coords	crd;
 	t_draw_image	draw;
@@ -117,10 +116,10 @@ void		draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color)
 	if (crd.x == NULL)
 		if (!get_new_map(mlx->m->x, mlx->m->y, &crd.x) \
 			|| !get_new_map(mlx->m->x, mlx->m->y, &crd.y))
-			exit (0/*free_maps(map, color, -1)*/);// написать эту ф-цию
+			exit(0);
 	if (mlx->img->far_prm == 1 && crd.far == NULL)
 		if (!get_new_map(mlx->m->x, mlx->m->y, &crd.far))
-			exit (0/*free_maps(map, color, -1)*/);// написать эту ф-цию
+			exit(0);
 	crd.map = map;
 	crd.color = color;
 	get_coord_map(mlx, v, &crd);

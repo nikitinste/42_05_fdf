@@ -6,11 +6,11 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 16:55:10 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/27 16:56:12 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/11 14:47:07 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
+#include "fdf.h"
 
 int		error_msg(char *message)
 {
@@ -56,7 +56,7 @@ int		get_color(char *str)
 	int		color;
 	int		i;
 
-	i = 0;// Было 2
+	i = 0;
 	color = 0;
 	while (str[i] != '\0')
 	{
@@ -69,7 +69,7 @@ int		get_color(char *str)
 	return (color);
 }
 
-int 	free_arr(int ***map, int ***color, t_make_arr *a, int err)
+int		free_arr(int ***map, int ***color, t_make_arr *a, int err)
 {
 	int		i;
 
@@ -90,9 +90,9 @@ int 	free_arr(int ***map, int ***color, t_make_arr *a, int err)
 					free(color[0][a->row_i]);
 			a->row_i--;
 		}
-		free (map[0]);
+		free(map[0]);
 		if (color[0] != NULL)
-			free (color[0]);
+			free(color[0]);
 	}
 	return (0);
 }

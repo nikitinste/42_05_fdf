@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
+#include "fdf.h"
 
 void	bump_up(double *angle, int *i, int a)
 {
@@ -29,7 +29,7 @@ void	bump_down(double *angle, int *i, int a)
 	*angle = (M_PI * *i) / 180;
 }
 
-void	left_iso(int key, t_mlx_prms	*x)
+void	left_iso(int key, t_mlx_prms *x)
 {
 	if (key == 37)
 	{
@@ -51,7 +51,7 @@ void	left_iso(int key, t_mlx_prms	*x)
 	}
 }
 
-void	top_front(int key, t_mlx_prms	*x)
+void	top_front(int key, t_mlx_prms *x)
 {
 	if (key == 17)
 	{
@@ -73,7 +73,7 @@ void	top_front(int key, t_mlx_prms	*x)
 	}
 }
 
-void	map_rotation(int key, t_mlx_prms	*x)
+void	map_rotation(int key, t_mlx_prms *x)
 {
 	if (key == 6)
 		bump_up(&(x->v->x_ang), &(x->x_i), 5);

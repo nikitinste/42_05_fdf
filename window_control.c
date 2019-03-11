@@ -6,13 +6,13 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/10 20:27:39 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/11 14:46:03 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
+#include "fdf.h"
 
-void	clear_image(t_img_data *img, t_win_prm	*win)
+void		clear_image(t_img_data *img, t_win_prm *win)
 {
 	int		*image;
 	int		i;
@@ -28,12 +28,9 @@ void	clear_image(t_img_data *img, t_win_prm	*win)
 	}
 }
 
-static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
-	t_perp_prms *p)
+static void	set_first(t_mlx_prms *x, t_img_data *img, t_view_prms *v)
 {
-	unsigned int	i;
-
-	img->b_clr = 0x555555;
+	img->b_clr = BCLR;
 	img->woo_prm = 1;
 	img->far_prm = 0;
 	x->v = v;
@@ -44,6 +41,13 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 	x->x_i = 0;
 	x->y_i = 0;
 	x->z_i = 0;
+}
+
+static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v)
+{
+	unsigned int	i;
+
+	set_first(x, img, v);
 	if (SCALE > 9 && SCALE < 51)
 		v->scale = SCALE;
 	else
@@ -55,7 +59,6 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 		v->scl_max = (i / 2) / (x->m->y - 1);
 	v->x = x->win->x / 2;
 	v->y = x->win->y / 2;
-	v->p = p;
 	v->img = img;
 	v->scr_hold = 0;
 	v->mouse_hld = 0;
@@ -63,8 +66,8 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v, \
 		v->line_clr = -1;
 	else
 		v->line_clr = get_invers_clr(img->b_clr, img->ndn);
-	p->far = 100;
-	p->height = 50;
+	v->far = 100;
+	v->height = 50;
 }
 
 static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
@@ -78,14 +81,14 @@ static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
 			win->x = SCALE * 4;
 		else
 			win->x = (m.y - 1) * SCALE * 4;
-		if (win->x > 2560)
-			win->x = 2560;
+		if (win->x > DISP_X)
+			win->x = DISP_X;
 		if (m.x < 2)
 			win->y = SCALE * 4;
 		else
 			win->y = (m.x - 1) * SCALE * 4;
-		if (win->y > 1395)
-			win->y = 1395;
+		if (win->y > (DISP_Y - 45))
+			win->y = DISP_Y - 45;
 	}
 	return (1);
 }
@@ -96,29 +99,22 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	t_win_prm	win;
 	t_img_data	img;
 	t_view_prms	v;
-	t_perp_prms	p;
 
-	print_maps(map, color, m);
-	if (!window_param(map, m, &win, name))// Зачем эта защита???
-		return (0/*free_maps(map, color, -1)*/);// написать эту ф-цию
+	window_param(map, m, &win, name);
 	x.mlx_ptr = mlx_init();
 	x.win_ptr = mlx_new_window(x.mlx_ptr, win.x, win.y, win.name);
-	x.img_ptr = mlx_new_image (x.mlx_ptr, win.x, win.y);
-	img.addr = mlx_get_data_addr (x.img_ptr, &img.bpp, &img.lsz, &img.ndn);	//
-	print_win_param(&win, &img);//
+	x.img_ptr = mlx_new_image(x.mlx_ptr, win.x, win.y);
+	img.addr = mlx_get_data_addr(x.img_ptr, &img.bpp, &img.lsz, &img.ndn);
 	x.win = &win;
 	x.img = &img;
 	x.m = &m;
 	img.win = &win;
 	x.color = color;
 	x.map = map;
-	set_img_param(&x, &img, &v, &p);
-	clear_image(x.img, x.win);
-	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);
-	draw_image(&x, &v, map, color);
-	mlx_put_image_to_window (x.mlx_ptr, x.win_ptr, x.img_ptr, 0, 0);
-	mlx_hook(x.win_ptr, 2, 0, &deal_key, (void*)&x);//keyboard
-	mlx_hook(x.win_ptr, 17, 0, &close_window, (void*)&x);//red cross
+	set_img_param(&x, &img, &v);
+	renew_window(&x);
+	mlx_hook(x.win_ptr, 2, 0, &deal_key, (void*)&x);
+	mlx_hook(x.win_ptr, 17, 0, &close_window, (void*)&x);
 	mlx_hook(x.win_ptr, 4, 0, &mouse_press, (void*)&x);
 	mlx_hook(x.win_ptr, 5, 0, &mouse_release, (void*)&x);
 	mlx_hook(x.win_ptr, 6, 0, &mouse_move, (void*)&x);

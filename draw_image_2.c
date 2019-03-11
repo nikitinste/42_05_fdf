@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
+#include "fdf.h"
 
-void get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
+void	get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 {
 	if (mlx && v && crd)
 		return ;
@@ -25,7 +25,7 @@ void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	i->y_cr = (i->x * SCL) - (((mlx->m->x - 1) * SCL) / 2);
 	i->z_cr = mlx->map[0][i->x][i->y] * SCL;
 	i->x_crd = i->x_cr * cos(OZ) + i->y_cr * sin(OZ);
-	i->y_crd = - i->x_cr * sin(OZ) + i->y_cr * cos(OZ);
+	i->y_crd = -i->x_cr * sin(OZ) + i->y_cr * cos(OZ);
 	i->x_cr = i->x_crd;
 	i->y_cr = i->y_crd;
 	i->y_crd = i->y_cr * cos(OX) + i->z_cr * sin(OX);

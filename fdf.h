@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/11 13:47:54 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/11 15:28:09 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@
 # include "libft/libft.h"
 # define WIN_X 0
 # define WIN_Y 0
+# define DISP_X 2560
+# define DISP_Y 1440
 # define SCALE 20
+# define BCLR 0x555555
 # define BUF a->buf_str[a->buf_i]
 # define SCL v->scale
 # define WIN mlx->win_ptr
@@ -29,9 +32,11 @@
 # define OY mlx->v->y_ang
 # define OZ mlx->v->z_ang
 
-typedef struct	s_view_prms t_view_prms;
+typedef struct s_view_prms	t_view_prms;
 
-/* Operational map array params: a */
+/*
+** Operational map array params: a
+*/
 
 typedef struct	s_make_arr
 {
@@ -43,7 +48,9 @@ typedef struct	s_make_arr
 	int				buf_i;
 }				t_make_arr;
 
-/* Map params: m */
+/*
+** Map params: m
+*/
 
 typedef struct	s_map_prm
 {
@@ -51,7 +58,9 @@ typedef struct	s_map_prm
 	int				y;
 }				t_map_prm;
 
-/* window params: win */
+/*
+** window params: win
+*/
 
 typedef struct	s_win_prm
 {
@@ -60,7 +69,9 @@ typedef struct	s_win_prm
 	char			*name;
 }				t_win_prm;
 
-/* img */
+/*
+** img
+*/
 
 typedef struct	s_img_data
 {
@@ -74,7 +85,9 @@ typedef struct	s_img_data
 	t_win_prm		*win;
 }				t_img_data;
 
-/* Current dot params: a, b */
+/*
+** Current dot params: a, b
+*/
 
 typedef struct	s_pix_prm
 {
@@ -83,7 +96,9 @@ typedef struct	s_pix_prm
 	int				color;
 }				t_pix_prm;
 
-/* Mouse params: mouse */
+/*
+** Mouse params: mouse
+*/
 
 typedef struct	s_mouse_crd
 {
@@ -92,7 +107,9 @@ typedef struct	s_mouse_crd
 	int				y;
 }				t_mouse_crd;
 
-/* x || mlx */
+/*
+** x || mlx
+*/
 
 typedef struct	s_mlx_prms
 {
@@ -112,17 +129,11 @@ typedef struct	s_mlx_prms
 	int				z_i;
 }				t_mlx_prms;
 
-/* Perspective prms: p */
+/*
+** View params: v
+*/
 
-typedef struct	s_perp_prms
-{
-	int				far;
-	int				height;
-}				t_perp_prms;
-
-/* View params: v */
-
-struct s_view_prms
+struct			s_view_prms
 {
 	int				proj;
 	double			x_ang;
@@ -136,12 +147,14 @@ struct s_view_prms
 	int				line_clr;
 	int				scr_hold;
 	int				mouse_hld;
-	t_perp_prms		*p;
 	t_img_data		*img;
-
+	int				far;
+	int				height;
 };
 
-/* Coords: crd */
+/*
+** Coords: crd
+*/
 
 typedef struct	s_coords
 {
@@ -152,31 +165,37 @@ typedef struct	s_coords
 	int				***color;
 }				t_coords;
 
-/* Window coords */
+/*
+** Window coords
+*/
 
 typedef struct	s_coord_map
 {
-	int		x;
-	int		y;
-	double	x_cr;
-	double	y_cr;
-	double	z_cr;
-	double	x_crd;
-	double	y_crd;
-	double	z_crd;
+	int				x;
+	int				y;
+	double			x_cr;
+	double			y_cr;
+	double			z_cr;
+	double			x_crd;
+	double			y_crd;
+	double			z_crd;
 }				t_coord_map;
 
-/* Operational draw image params: draw */
+/*
+** Operational draw image params: draw
+*/
 
 typedef struct	s_draw_image
 {
-	t_pix_prm	a;
-	t_pix_prm	b;
-	int			x;
-	int			y;
+	t_pix_prm		a;
+	t_pix_prm		b;
+	int				x;
+	int				y;
 }				t_draw_image;
 
-/* Input grad params: clr */
+/*
+** Input grad params: clr
+*/
 
 typedef struct	s_grad_prms
 {
@@ -185,7 +204,9 @@ typedef struct	s_grad_prms
 	int				b;
 }				t_grad_prms;
 
-/* Operational grad params: grad */
+/*
+** Operational grad params: grad
+*/
 
 typedef struct	s_grad
 {
@@ -201,7 +222,9 @@ typedef struct	s_grad
 	int				alpha;
 }				t_grad;
 
-/* Operational build line params: l */
+/*
+** Operational build line params: l
+*/
 
 typedef struct	s_line_prm
 {
@@ -227,47 +250,45 @@ typedef struct	s_woo_prm
 
 typedef struct	s_get_alpha
 {
-	int				remndr;
+	int				rem;
 	int				p_dist;
 	int				n_dist;
 }				t_get_alpha;
 
-int		error_msg(char *message);
-int		col_count(char ***row);
-int 	free_arr(int ***map, int ***color, t_make_arr *a, int err);
-int		get_zeromap(t_make_arr *a, int ***map);
-int		get_new_map(int row_count, int col_count, int ***map);
-int		window_control(int ***map, int ***color, t_map_prm m, char *name);
-int		get_color(char *str);
-int		put_pix_to_img(t_line_prm *l, int x, int y, int color);
-void	put_line_to_img(t_img_data *img, t_pix_prm a, t_pix_prm b);
-int		put_woo_to_img(t_line_prm *l, int x, int y, int color);
-void	clear_image(t_img_data *img, t_win_prm	*win);
-int		deal_key(int key, void *prm);
-int		mouse_press(int key, int x, int y, void *prm);
-int		mouse_release(int key, int x, int y, void *prm);
-int		mouse_move(int x, int y, void *prm);
-int 	close_window(void *param);
-void	draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, int ***color);
-int		get_invers_clr(int color, int ndn);
-void	bump_up(double *angle, int *i, int a);
-void	bump_down(double *angle, int *i, int a);
-void	renew_window(t_mlx_prms *mlx);
-int		mouse_scroll(t_mlx_prms *mlx, t_mouse_crd *scroll, int x, int y);
-int		mouse_button(t_mlx_prms *mlx, t_mouse_crd *mouse, int x, int y);
-void	mouse_scale(int key, t_mlx_prms	*mlx);
-void	bump_up(double *angle, int *i, int a);
-void	bump_down(double *angle, int *i, int a);
-void	left_iso(int key, t_mlx_prms	*x);
-void	top_front(int key, t_mlx_prms	*x);
-void	map_rotation(int key, t_mlx_prms	*x);
-void	get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd);
-void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
+int				error_msg(char *message);
+int				col_count(char ***row);
+int				free_arr(int ***map, int ***color, t_make_arr *a, int err);
+int				get_zeromap(t_make_arr *a, int ***map);
+int				get_new_map(int row_count, int col_count, int ***map);
+int				window_control(int ***map, int ***color, t_map_prm m, \
+	char *name);
+int				get_color(char *str);
+int				put_pix_to_img(t_line_prm *l, int x, int y, int color);
+void			put_line_to_img(t_img_data *img, t_pix_prm a, t_pix_prm b);
+int				put_woo_to_img(t_line_prm *l, int x, int y, int color);
+void			clear_image(t_img_data *img, t_win_prm	*win);
+int				deal_key(int key, void *prm);
+int				mouse_press(int key, int x, int y, void *prm);
+int				mouse_release(int key, int x, int y, void *prm);
+int				mouse_move(int x, int y, void *prm);
+int				close_window(void *param);
+void			draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, \
+	int ***color);
+int				get_invers_clr(int color, int ndn);
+void			bump_up(double *angle, int *i, int a);
+void			bump_down(double *angle, int *i, int a);
+void			renew_window(t_mlx_prms *mlx);
+int				mouse_scroll(t_mlx_prms *mlx, t_mouse_crd *scroll, int x, \
+	int y);
+int				mouse_button(t_mlx_prms *mlx, t_mouse_crd *mouse, int x, int y);
+void			mouse_scale(int key, t_mlx_prms	*mlx);
+void			bump_up(double *angle, int *i, int a);
+void			bump_down(double *angle, int *i, int a);
+void			left_iso(int key, t_mlx_prms	*x);
+void			top_front(int key, t_mlx_prms	*x);
+void			map_rotation(int key, t_mlx_prms	*x);
+void			get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd);
+void			get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	t_coord_map *i);
-void	set_gard_color(t_grad *g, t_grad_prms *clr, int pos);
-//
-void	print_image(t_img_data img, t_win_prm win);//! Убрать это потом!!
-void	print_win_param(t_win_prm *win, t_img_data *img);
-void	print_maps(int ***map, int ***color, t_map_prm m);
-void	print_color(int color);
+void			set_gard_color(t_grad *g, t_grad_prms *clr, int pos);
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
+#include "fdf.h"
 
 int		mouse_scroll(t_mlx_prms *mlx, t_mouse_crd *scroll, int x, int y)
 {
@@ -47,11 +47,11 @@ int		mouse_button(t_mlx_prms *mlx, t_mouse_crd *mouse, int x, int y)
 	{
 		if ((x - mouse->x) > 0)
 			bump_down(&(mlx->v->y_ang), &(mlx->y_i), 3);
-		else if((x - mouse->x) < 0)
+		else if ((x - mouse->x) < 0)
 			bump_up(&(mlx->v->y_ang), &(mlx->y_i), 3);
 		if ((y - mouse->y) > 0)
 			bump_up(&(mlx->v->x_ang), &(mlx->x_i), 3);
-		else if((y - mouse->y) < 0)
+		else if ((y - mouse->y) < 0)
 			bump_down(&(mlx->v->x_ang), &(mlx->x_i), 3);
 		mouse->x = x;
 		mouse->y = y;
@@ -60,7 +60,7 @@ int		mouse_button(t_mlx_prms *mlx, t_mouse_crd *mouse, int x, int y)
 	return (0);
 }
 
-void	mouse_scale(int key, t_mlx_prms	*mlx)
+void	mouse_scale(int key, t_mlx_prms *mlx)
 {
 	if (key == 5)
 	{
@@ -70,13 +70,13 @@ void	mouse_scale(int key, t_mlx_prms	*mlx)
 				mlx->v->scale += 5;
 		}
 		else if (mlx->v->scale < mlx->v->scl_max)
-				mlx->v->scale++;
+			mlx->v->scale++;
 	}
 	if (key == 4)
 	{
 		if (mlx->v->scale > 50)
-				mlx->v->scale -= 5;
+			mlx->v->scale -= 5;
 		else if (mlx->v->scale > 2)
-				mlx->v->scale--;
+			mlx->v->scale--;
 	}
 }

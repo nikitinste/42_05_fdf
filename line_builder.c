@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
+#include "fdf.h"
 
 static int	get_grad_color(t_img_data *img, t_grad_prms *clr, int pos)
 {
@@ -98,7 +98,7 @@ void		put_line_to_img(t_img_data *img, t_pix_prm a, t_pix_prm b)
 		return ;
 	if (((a.x < 0 || a.x >= img->win->x) || (a.y < 0 || a.y >= img->win->y)) \
 		&& ((b.x < 0 || b.x >= img->win->x) || (b.y < 0 || b.y >= img->win->y)))
-			return ;
+		return ;
 	if (img->woo_prm == 0)
 		method = &put_pix_to_img;
 	if (img->woo_prm == 1)

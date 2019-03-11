@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
-
-
+#include "fdf.h"
 
 int		mouse_move(int x, int y, void *prm)
 {
@@ -75,8 +73,6 @@ int		mouse_press(int key, int x, int y, void *prm)
 	return (0);
 }
 
-
-
 int		deal_key(int key, void *prm)
 {
 	t_mlx_prms	*x;
@@ -85,8 +81,8 @@ int		deal_key(int key, void *prm)
 	if (key == 53)
 	{
 		ft_putnbr(key);
-		mlx_destroy_window (x->mlx_ptr, x->win_ptr);
-		exit (0);
+		mlx_destroy_window(x->mlx_ptr, x->win_ptr);
+		exit(0);
 	}
 	if (key == 6 || key == 0 || key == 125 || key == 126 || key == 123 || \
 		key == 124 || key == 17 || key == 3 || key == 37 || key == 34)

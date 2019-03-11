@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
+#include "fdf.h"
 
 static int	make_color(t_make_arr *a, int ***color, int ***map)
 {
@@ -32,6 +32,7 @@ static int	make_color(t_make_arr *a, int ***color, int ***map)
 static int	get_row(t_list *list, t_make_arr *a, int ***map, int ***color)
 {
 	int		z;
+
 	a->buf_str = ft_strsplit(list->content, ' ');
 	a->col_count = col_count(&(a->buf_str));
 	if (a->col_count != a->col_cnt_prev)
@@ -109,12 +110,12 @@ int			main(int argc, char **argv)
 	int			**color;
 
 	if (argc != 2)
-		return(error_msg("usage: ./fdf map_file.fdf"));
+		return (error_msg("usage: ./fdf map_file.fdf"));
 	list = NULL;
 	if (!read_map(argv[1], &list))
-		return(error_msg("Map file error."));
+		return (error_msg("Map file error."));
 	if (list == NULL)
-		return(error_msg("Empty map_file"));
+		return (error_msg("Empty map_file"));
 	color = NULL;
 	if (!make_arr(list, &map, &color, &m))
 	{
