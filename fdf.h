@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/10 20:08:49 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/11 13:47:54 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # define BUF a->buf_str[a->buf_i]
 # define SCL v->scale
 # define WIN mlx->win_ptr
-//# define Z mlx->map[0][x][y]
 # define OX mlx->v->x_ang
 # define OY mlx->v->y_ang
 # define OZ mlx->v->z_ang
@@ -198,6 +197,8 @@ typedef struct	s_grad
 	int				d2;
 	int				d3;
 	int				color;
+	int				start;
+	int				alpha;
 }				t_grad;
 
 /* Operational build line params: l */
@@ -219,6 +220,9 @@ typedef struct	s_woo_prm
 	int				pos;
 	int				neg;
 	int				origin;
+	int				sign;
+	int				x;
+	int				y;
 }				t_woo_prm;
 
 typedef struct	s_get_alpha
@@ -257,9 +261,10 @@ void	bump_down(double *angle, int *i, int a);
 void	left_iso(int key, t_mlx_prms	*x);
 void	top_front(int key, t_mlx_prms	*x);
 void	map_rotation(int key, t_mlx_prms	*x);
-void get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd);
+void	get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd);
 void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	t_coord_map *i);
+void	set_gard_color(t_grad *g, t_grad_prms *clr, int pos);
 //
 void	print_image(t_img_data img, t_win_prm win);//! Убрать это потом!!
 void	print_win_param(t_win_prm *win, t_img_data *img);
