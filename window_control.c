@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/11 14:46:03 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/16 19:11:37 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v)
 	unsigned int	i;
 
 	set_first(x, img, v);
-	if (SCALE > 9 && SCALE < 51)
-		v->scale = SCALE;
-	else
-		v->scale = 10;
+	set_scale(x, v);
 	i = -1;
 	if (x->m->x > x->m->y)
 		v->scl_max = (i / 2) / (x->m->x - 1);
@@ -83,12 +80,16 @@ static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
 			win->x = (m.y - 1) * SCALE * 4;
 		if (win->x > DISP_X)
 			win->x = DISP_X;
+		if (win->x < 500)
+			win->x = 500;
 		if (m.x < 2)
 			win->y = SCALE * 4;
 		else
 			win->y = (m.x - 1) * SCALE * 4;
 		if (win->y > (DISP_Y - 45))
 			win->y = DISP_Y - 45;
+		if (win->y < 500)
+			win->y = 500;
 	}
 	return (1);
 }

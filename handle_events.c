@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/10 19:51:08 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/16 19:23:25 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ int		mouse_release(int key, int x, int y, void *prm)
 	{
 		if (key == 3)
 		{
+			mouse_move(x, y, prm);
 			mlx->v->scr_hold = 0;
 			mlx->scroll->i = 0;
 		}
 		if (key == 1)
 		{
+			mouse_move(x, y, prm);
 			mlx->v->mouse_hld = 0;
 			mlx->mouse->i = 0;
 		}
@@ -80,7 +82,6 @@ int		deal_key(int key, void *prm)
 	x = (t_mlx_prms*)prm;
 	if (key == 53)
 	{
-		ft_putnbr(key);
 		mlx_destroy_window(x->mlx_ptr, x->win_ptr);
 		exit(0);
 	}
@@ -94,6 +95,8 @@ int		deal_key(int key, void *prm)
 		else
 			x->img->woo_prm = 0;
 	}
+	if (key == 29)
+		mouse_scale(key, x);
 	renew_window(x);
 	return (0);
 }

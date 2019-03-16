@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 19:41:03 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/10 19:44:07 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/16 19:25:14 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	mouse_scale(int key, t_mlx_prms *mlx)
 	{
 		if (mlx->v->scale >= 50)
 		{
-			if (mlx->v->scale < (mlx->v->scl_max + 5))
+			if (mlx->v->scale < (mlx->v->scl_max - 5))
 				mlx->v->scale += 5;
 		}
 		else if (mlx->v->scale < mlx->v->scl_max)
@@ -78,5 +78,11 @@ void	mouse_scale(int key, t_mlx_prms *mlx)
 			mlx->v->scale -= 5;
 		else if (mlx->v->scale > 2)
 			mlx->v->scale--;
+	}
+	if (key == 29)
+	{
+		set_scale(mlx, mlx->v);
+		mlx->v->x = mlx->win->x / 2;
+		mlx->v->y = mlx->win->y / 2;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 19:30:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/11 14:45:56 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/16 19:49:58 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,30 @@ void	renew_window(t_mlx_prms *mlx)
 	mlx_put_image_to_window(mlx->mlx_ptr, WIN, mlx->img_ptr, 0, 0);
 	draw_image(mlx, mlx->v, mlx->map, mlx->color);
 	mlx_put_image_to_window(mlx->mlx_ptr, WIN, mlx->img_ptr, 0, 0);
+}
+
+void	set_scale(t_mlx_prms *x, t_view_prms *v)
+{
+	int		min_side;
+
+	if (SCALE > 9 && SCALE < 51)
+		v->scale = SCALE;
+	else
+		v->scale = 10;
+	if ((v->scale * (x->m->x - 1)) > x->win->y \
+		|| (v->scale * (x->m->y - 1)) > x->win->x)
+	{
+		if (x->win->x > x->win->y)
+			min_side = x->win->y;
+		else
+			min_side = x->win->x;
+		if (x->m->x > x->m->y)
+			v->scale = min_side / (x->m->x - 1);
+		else
+			v->scale = min_side / (x->m->y - 1);
+		if (v->scale < 2)
+			v->scale = 2;
+	}
 }
 
 int		get_new_map(int row_count, int col_count, int ***map)

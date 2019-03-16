@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/11 15:28:09 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/16 19:11:18 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,4 +291,5 @@ void			get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd);
 void			get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	t_coord_map *i);
 void			set_gard_color(t_grad *g, t_grad_prms *clr, int pos);
+void			set_scale(t_mlx_prms *x, t_view_prms *v);
 #endif

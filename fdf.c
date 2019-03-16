@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:57 by uhand             #+#    #+#             */
-/*   Updated: 2019/02/26 20:40:46 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/16 17:10:45 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,10 @@ int			main(int argc, char **argv)
 		return (error_msg("Invalid map."));
 	}
 	ft_lstdel(&list, &ft_lstfree);
+	if (m.x == 1 && m.y == 1)
+	{
+		error_msg("Please set the correct map, at least two dots.");
+		exit(0);
+	}
 	return (window_control(&map, &color, m, argv[1]));
 }
