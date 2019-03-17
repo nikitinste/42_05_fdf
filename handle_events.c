@@ -6,11 +6,34 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/16 19:23:25 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 15:58:46 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	change_params(int key, t_mlx_prms	*x)
+{
+	if (key == 4)
+	{
+		if (x->v->help_rpm == 1)
+			x->v->help_rpm = 0;
+		else
+			x->v->help_rpm = 1;
+	}
+	if (key == 43)
+	{
+		if ((x->img->b_clr - 0x111111) >= 0)
+			x->img->b_clr -= 0x111111;
+		//if (x->img->b_clr <= 0x777777)
+	}
+	if (key == 47)
+	{
+		if ((x->img->b_clr + 0x111111) <= 0xFFFFFF)
+			x->img->b_clr += 0x111111;
+		//if (x->img->b_clr <= 0x777777)
+	}
+}
 
 int		mouse_move(int x, int y, void *prm)
 {
@@ -95,6 +118,8 @@ int		deal_key(int key, void *prm)
 		else
 			x->img->woo_prm = 0;
 	}
+	if (key == 4 || key == 43 || key == 47)
+		change_params(key, x);
 	if (key == 29)
 		mouse_scale(key, x);
 	renew_window(x);

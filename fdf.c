@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:57 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/16 17:10:45 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 14:45:38 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ static int	read_map(char *file_name, t_list **l_ptr)
 		if ((ft_lstaddnext(l_ptr, line, (ft_strlen(line) + 1))) == -1)
 		{
 			ft_lstdel(l_ptr, &ft_lstfree);
+			free(line);
+			close(fd);
 			return (0);
 		}
 		free(line);
@@ -96,6 +98,7 @@ static int	read_map(char *file_name, t_list **l_ptr)
 	if (ret == -1)
 	{
 		ft_lstdel(l_ptr, &ft_lstfree);
+		close(fd);
 		return (0);
 	}
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/16 19:11:37 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 15:21:22 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v)
 	v->img = img;
 	v->scr_hold = 0;
 	v->mouse_hld = 0;
+	v->help_rpm = 1;
 	if (x->color[0])
 		v->line_clr = -1;
 	else
@@ -80,8 +81,8 @@ static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
 			win->x = (m.y - 1) * SCALE * 4;
 		if (win->x > DISP_X)
 			win->x = DISP_X;
-		if (win->x < 500)
-			win->x = 500;
+		if (win->x < 700)
+			win->x = 700;
 		if (m.x < 2)
 			win->y = SCALE * 4;
 		else

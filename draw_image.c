@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/11 14:41:30 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 13:34:44 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,5 @@ void		draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map,\
 	crd.map = map;
 	crd.color = color;
 	get_coord_map(mlx, v, &crd);
-	get_lines(mlx, &crd, &draw);
+	get_lines(mlx, &crd, &draw);	
 }
