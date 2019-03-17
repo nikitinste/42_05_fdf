@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 20:08:08 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/10 20:09:31 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 19:07:43 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,27 @@ void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	crd->y[i->x][i->y] = v->y + i->y_crd;
 	if (mlx->img->far_prm == 1)
 		crd->far[i->x][i->y] = i->z_crd;
+}
+
+void	set_z_limits(t_mlx_prms *mlx, t_view_prms *v)
+{
+	int		x;
+	int		y;
+
+	v->z_min = 0;
+	v->z_max = 0;
+	x = 0;
+	while (x < mlx->m->x)
+	{
+		y = 0;
+		while (y < mlx->m->y)
+		{
+			if (mlx->map[0][x][y] > v->z_max)
+				v->z_max = mlx->map[0][x][y];
+			if (mlx->map[0][x][y] < v->z_min)
+				v->z_min = mlx->map[0][x][y];
+			y++;
+		}
+		x++;
+	}
 }

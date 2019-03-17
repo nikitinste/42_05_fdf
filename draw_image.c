@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 17:22:35 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 19:12:48 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static void	set_vert_line(t_coords *crd, t_draw_image *draw, \
 		if (draw->b.color == v->img->b_clr)
 			draw->b.color = get_invers_clr(draw->b.color, v->img->ndn);
 	}
+	/*if (v->clr_prm)
+		set_high_color()*/
 	else
 	{
 		draw->a.color = v->line_clr;

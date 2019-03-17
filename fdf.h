@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 17:56:38 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 18:58:59 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,8 @@ struct			s_view_prms
 	int				mouse_hld;
 	int				far;
 	int				height;
+	int				z_min;
+	int				z_max;
 	int				clr_prm;
 	int				help_rpm;
 	t_img_data		*img;
@@ -295,4 +297,5 @@ void			get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	t_coord_map *i);
 void			set_gard_color(t_grad *g, t_grad_prms *clr, int pos);
 void			set_scale(t_mlx_prms *x, t_view_prms *v);
+void			set_z_limits(t_mlx_prms *x, t_view_prms *v);
 #endif

@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-static void	change_params(int key, t_mlx_prms	*x)
+static void	change_params(int key, t_mlx_prms *x)
 {
 	if (key == 4)
 	{
@@ -41,7 +41,7 @@ static void	change_params(int key, t_mlx_prms	*x)
 	}
 }
 
-int		mouse_move(int x, int y, void *prm)
+int			mouse_move(int x, int y, void *prm)
 {
 	static t_mouse_crd	scroll;
 	static t_mouse_crd	mouse;
@@ -57,7 +57,7 @@ int		mouse_move(int x, int y, void *prm)
 	return (0);
 }
 
-int		mouse_release(int key, int x, int y, void *prm)
+int			mouse_release(int key, int x, int y, void *prm)
 {
 	t_mlx_prms	*mlx;
 
@@ -80,7 +80,7 @@ int		mouse_release(int key, int x, int y, void *prm)
 	return (0);
 }
 
-int		mouse_press(int key, int x, int y, void *prm)
+int			mouse_press(int key, int x, int y, void *prm)
 {
 	t_mlx_prms	*mlx;
 
@@ -104,7 +104,7 @@ int		mouse_press(int key, int x, int y, void *prm)
 	return (0);
 }
 
-int		deal_key(int key, void *prm)
+int			deal_key(int key, void *prm)
 {
 	t_mlx_prms	*x;
 

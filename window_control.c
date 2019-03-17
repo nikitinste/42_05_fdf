@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 18:00:59 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 19:06:29 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	set_img_param(t_mlx_prms *x, t_img_data *img, t_view_prms *v)
 	v->line_clr = 0x000000;
 	v->far = 100;
 	v->height = 50;
+	set_z_limits(x, v);
 }
 
 static int	window_param(int ***map, t_map_prm m, t_win_prm *win, char *name)
