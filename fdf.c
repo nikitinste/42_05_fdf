@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:57 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 14:45:38 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 17:55:27 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ static int	make_color(t_make_arr *a, int ***color, int ***map)
 	}
 	start = ft_strchr(BUF, 'x');
 	start++;
+	if (!((*start >= '0' && *start <= '9') || (*start >= 'A' && *start <= 'F') \
+		|| (*start >= 'a' && *start <= 'f')))
+		return (0);
 	color[0][a->row_i][a->buf_i] = get_color(start);
 	return (1);
 }
