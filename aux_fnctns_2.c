@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 19:30:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 15:47:25 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 16:47:46 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,17 @@ void	renew_window(t_mlx_prms *mlx)
 	mlx_put_image_to_window(mlx->mlx_ptr, WIN, mlx->img_ptr, 0, 0);
 	if (mlx->v->help_rpm)
 	{
-		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 7, (mlx->win->y - 65), \
+		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 7, (mlx->win->y - 85), \
 			mlx->v->line_clr, "H - hide/show help | Mouse(L) - rotation | \
 				Scroll - zoom & move(push)");
-		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 5, (mlx->win->y - 45), \
+		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 5, (mlx->win->y - 65), \
 			mlx->v->line_clr, "Views: T - top, F - front, L - left , I - \
 				isometric | 0 - reset scale");
-		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 5, (mlx->win->y - 25), \
+		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 5, (mlx->win->y - 45), \
 			mlx->v->line_clr, "1 - off/on antialiasing | Asix rotation: \
 				left-right/up-down/A-Z Z/Y/X");
+		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 5, (mlx->win->y - 25), \
+			mlx->v->line_clr, "< > - change background color");
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 15:08:26 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 17:13:18 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define DISP_Y 1440
 # define SCALE 20
 # define BCLR 0x555555
+# define BC x->img->b_clr
 # define BUF a->buf_str[a->buf_i]
 # define SCL v->scale
 # define WIN mlx->win_ptr
@@ -149,6 +150,7 @@ struct			s_view_prms
 	int				mouse_hld;
 	int				far;
 	int				height;
+	int				clr_prm;
 	int				help_rpm;
 	t_img_data		*img;
 };

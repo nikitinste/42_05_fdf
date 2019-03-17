@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 13:34:44 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 17:22:35 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,16 @@ static void	set_hor_line(t_coords *crd, t_draw_image *draw, \
 	draw->a.y = crd->y[draw->x][draw->y];
 	draw->b.x = crd->x[draw->x][draw->y + 1];
 	draw->b.y = crd->y[draw->x][draw->y + 1];
-	if (v->line_clr < 0 && color[0])
+	if (!(v->clr_prm) && color[0])
 	{
 		draw->a.color = color[0][draw->x][draw->y];
+		if (draw->a.color == 0)
+			draw->a.color = v->line_clr;
 		if (draw->a.color == v->img->b_clr)
 			draw->a.color = get_invers_clr(draw->a.color, v->img->ndn);
 		draw->b.color = color[0][draw->x][draw->y + 1];
+		if (draw->b.color == 0)
+			draw->b.color = v->line_clr;
 		if (draw->b.color == v->img->b_clr)
 			draw->b.color = get_invers_clr(draw->b.color, v->img->ndn);
 	}
@@ -64,12 +68,16 @@ static void	set_vert_line(t_coords *crd, t_draw_image *draw, \
 	draw->a.y = crd->y[draw->x][draw->y];
 	draw->b.x = crd->x[draw->x + 1][draw->y];
 	draw->b.y = crd->y[draw->x + 1][draw->y];
-	if (v->line_clr < 0 && color[0])
+	if (!(v->clr_prm) && color[0])
 	{
 		draw->a.color = color[0][draw->x][draw->y];
+		if (draw->a.color == 0)
+			draw->a.color = v->line_clr;
 		if (draw->a.color == v->img->b_clr)
 			draw->a.color = get_invers_clr(draw->a.color, v->img->ndn);
 		draw->b.color = color[0][draw->x + 1][draw->y];
+		if (draw->b.color == 0)
+			draw->b.color = v->line_clr;
 		if (draw->b.color == v->img->b_clr)
 			draw->b.color = get_invers_clr(draw->b.color, v->img->ndn);
 	}
@@ -123,5 +131,5 @@ void		draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map,\
 	crd.map = map;
 	crd.color = color;
 	get_coord_map(mlx, v, &crd);
-	get_lines(mlx, &crd, &draw);	
+	get_lines(mlx, &crd, &draw);
 }

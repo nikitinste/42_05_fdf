@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 15:58:46 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/17 17:05:41 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,21 @@ static void	change_params(int key, t_mlx_prms	*x)
 	}
 	if (key == 43)
 	{
-		if ((x->img->b_clr - 0x111111) >= 0)
-			x->img->b_clr -= 0x111111;
-		//if (x->img->b_clr <= 0x777777)
+		if ((BC - 0x111111) >= 0)
+		{
+			if (BC >= 0x888888 && (BC - 0x111111) <= 0x777777)
+				x->v->line_clr = get_invers_clr(x->v->line_clr, x->img->ndn);
+			BC -= 0x111111;
+		}
 	}
 	if (key == 47)
 	{
-		if ((x->img->b_clr + 0x111111) <= 0xFFFFFF)
-			x->img->b_clr += 0x111111;
-		//if (x->img->b_clr <= 0x777777)
+		if ((BC + 0x111111) <= 0xFFFFFF)
+		{
+			if (BC <= 0x777777 && (BC + 0x111111) >= 0x888888)
+				x->v->line_clr = get_invers_clr(x->v->line_clr, x->img->ndn);
+			BC += 0x111111;
+		}
 	}
 }
 
