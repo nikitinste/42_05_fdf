@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 19:30:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 16:36:33 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 17:19:43 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	renew_window(t_mlx_prms *mlx)
 			mlx->v->line_clr, "1 - off/on antialiasing | Asix rotation: \
 				left-right/up-down/A-Z Z/Y/X");
 		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 5, (mlx->win->y - 25), \
-			mlx->v->line_clr, "< > - change background color");
+			mlx->v->line_clr, "color modes: 2 - on/off altitude heatmap | \
+			< > - background");
 	}
 }
 
