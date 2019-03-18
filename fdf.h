@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 18:58:59 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 13:03:30 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define DISP_X 2560
 # define DISP_Y 1440
 # define SCALE 20
-# define BCLR 0x555555
+# define BCLR 0x505050
 # define BC x->img->b_clr
 # define BUF a->buf_str[a->buf_i]
 # define SCL v->scale
