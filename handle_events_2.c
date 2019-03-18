@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 19:41:03 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/16 19:25:14 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 15:39:20 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,27 @@ void	mouse_scale(int key, t_mlx_prms *mlx)
 		set_scale(mlx, mlx->v);
 		mlx->v->x = mlx->win->x / 2;
 		mlx->v->y = mlx->win->y / 2;
+	}
+}
+
+void	change_background(int key, t_mlx_prms *x)
+{
+	if (key == 43)
+	{
+		if ((BC - 0x080808) >= 0)
+		{
+			if (BC >= 0x505050 && (BC - 0x080808) < 0x505050)
+				x->v->line_clr = get_invers_clr(x->v->line_clr, x->img->ndn);
+			BC -= 0x080808;
+		}
+	}
+	if (key == 47)
+	{
+		if ((BC + 0x080808) <= 0xFFFFFF)
+		{
+			if (BC < 0x505050 && (BC + 0x080808) >= 0x505050)
+				x->v->line_clr = get_invers_clr(x->v->line_clr, x->img->ndn);
+			BC += 0x080808;
+		}
 	}
 }

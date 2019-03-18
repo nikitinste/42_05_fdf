@@ -6,7 +6,7 @@
 #    By: uhand <uhand@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/31 19:43:18 by uhand             #+#    #+#              #
-#    Updated: 2019/03/17 18:37:20 by uhand            ###   ########.fr        #
+#    Updated: 2019/03/18 16:35:13 by uhand            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,11 @@ NAME = fdf
 HEAD = fdf.h
 SRC = fdf.c aux_fnctns.c window_control.c line_builder.c \
 line_builder_2.c handle_events.c draw_image.c aux_fnctns_2.c handle_events_2.c \
-handle_events_3.c draw_image_2.c line_builder_1.c
+handle_events_3.c draw_image_2.c line_builder_1.c aux_fnctns_3.c
 OBJ = fdf.o aux_fnctns.o window_control.o line_builder.o \
 line_builder_2.o handle_events.o draw_image.o aux_fnctns_2.o handle_events_2.o \
-handle_events_3.o draw_image_2.o line_builder_1.o
-FLAGS = -Wall -Wextra -Werror -g -m64 -Ofast -flto -march=native -funroll-loops
+handle_events_3.o draw_image_2.o line_builder_1.o aux_fnctns_3.o
+FLAGS = -Wall -Wextra -Werror -g -m64 -Ofast -flto -march=native -funroll-loops #-fsanitize=address
 LIB = -L libft -lft
 LIBPATH = ./libft
 MLIBX = -L  minilibx -lmlx -framework OpenGL -framework AppKit

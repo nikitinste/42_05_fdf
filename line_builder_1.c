@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 13:43:52 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/11 13:48:17 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 14:30:30 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		put_pix_to_img(t_line_prm *l, int x, int y, int color)
 	return (0);
 }
 
-void	set_gard_color(t_grad *g, t_grad_prms *clr, int pos)
+void	set_grad_color(t_grad *g, t_grad_prms *clr, int pos)
 {
 	g->a = (unsigned char*)&clr->a;
 	g->b = (unsigned char*)&clr->b;

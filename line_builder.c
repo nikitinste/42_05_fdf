@@ -6,13 +6,13 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 16:18:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/11 13:48:24 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 15:26:27 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	get_grad_color(t_img_data *img, t_grad_prms *clr, int pos)
+int			get_grad_color(t_img_data *img, t_grad_prms *clr, int pos)
 {
 	t_grad			grad;
 
@@ -28,7 +28,7 @@ static int	get_grad_color(t_img_data *img, t_grad_prms *clr, int pos)
 		grad.start = 1;
 		grad.alpha = 0;
 	}
-	set_gard_color(&grad, clr, pos);
+	set_grad_color(&grad, clr, pos);
 	return (grad.color);
 }
 

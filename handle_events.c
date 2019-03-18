@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 13:13:05 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 15:42:03 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,15 @@ static void	change_params(int key, t_mlx_prms *x)
 		else
 			x->v->help_rpm = 1;
 	}
-	if (key == 43)
+	if (key == 19)
 	{
-		if ((BC - 0x080808) >= 0)
-		{
-			if (BC >= 0x505050 && (BC - 0x080808) < 0x505050)
-				x->v->line_clr = get_invers_clr(x->v->line_clr, x->img->ndn);
-			BC -= 0x080808;
-		}
+		if (x->v->clr_prm == 0)
+			x->v->clr_prm = 1;
+		else
+			x->v->clr_prm = 0;
 	}
-	if (key == 47)
-	{
-		if ((BC + 0x080808) <= 0xFFFFFF)
-		{
-			if (BC < 0x505050 && (BC + 0x080808) >= 0x505050)
-				x->v->line_clr = get_invers_clr(x->v->line_clr, x->img->ndn);
-			BC += 0x080808;
-		}
-	}
+	if (key == 43 || key == 47)
+		change_background(key, x);
 }
 
 int			mouse_move(int x, int y, void *prm)
@@ -124,7 +115,7 @@ int			deal_key(int key, void *prm)
 		else
 			x->img->woo_prm = 0;
 	}
-	if (key == 4 || key == 43 || key == 47)
+	if (key == 4 || key == 43 || key == 47 || key == 19)
 		change_params(key, x);
 	if (key == 29)
 		mouse_scale(key, x);

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 19:30:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 16:47:46 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 16:36:33 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,24 @@ void	renew_window(t_mlx_prms *mlx)
 void	set_scale(t_mlx_prms *x, t_view_prms *v)
 {
 	int		min_side;
+	int		max_dim;
 
+	if (x->win->x > x->win->y)
+		min_side = x->win->y;
+	else
+		min_side = x->win->x;
 	if (SCALE > 9 && SCALE < 51)
 		v->scale = SCALE;
 	else
 		v->scale = 10;
-	if ((v->scale * (x->m->x - 1)) > x->win->y \
-		|| (v->scale * (x->m->y - 1)) > x->win->x)
+	if ((v->scale * (x->m->x - 1)) > x->win->y || (v->scale * (x->m->y - 1)) \
+		> x->win->x || v->scale * v->z_delta > min_side)
 	{
-		if (x->win->x > x->win->y)
-			min_side = x->win->y;
-		else
-			min_side = x->win->x;
-		if (x->m->x > x->m->y)
-			v->scale = min_side / (x->m->x - 1);
-		else
-			v->scale = min_side / (x->m->y - 1);
-		if (v->scale < 2)
-			v->scale = 2;
+		max_dim = set_max_dim((x->m->x - 1), (x->m->y - 1), v->z_delta);
+		v->scale = min_side / max_dim;
 	}
+	if (v->scale < 2)
+		v->scale = 2;
 }
 
 int		get_new_map(int row_count, int col_count, int ***map)

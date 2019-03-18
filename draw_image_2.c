@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 20:08:08 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 19:07:43 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 15:28:32 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,19 @@ void	set_z_limits(t_mlx_prms *mlx, t_view_prms *v)
 		}
 		x++;
 	}
+	v->z_delta = v->z_max - v->z_min;
+}
+
+void	set_high_color(t_mlx_prms *mlx, t_draw_image *draw, int prm)
+{
+	t_grad_prms	clr;
+
+	clr.a = LOWCLR;
+	clr.b = HICLR;
+	clr.delta = mlx->v->z_delta;
+	draw->a.color = get_grad_color(mlx->img, &clr, mlx->map[0][draw->x][draw->y]);
+	if (prm == 1)
+		draw->b.color = get_grad_color(mlx->img, &clr, mlx->map[0][draw->x + 1][draw->y]);
+	if (prm == 0)
+		draw->b.color = get_grad_color(mlx->img, &clr, mlx->map[0][draw->x][draw->y + 1]);
 }

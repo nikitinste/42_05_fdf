@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 13:03:30 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 16:31:35 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define DISP_Y 1440
 # define SCALE 20
 # define BCLR 0x505050
+# define HICLR 0xFF0000
+# define LOWCLR 0x0000FF
 # define BC x->img->b_clr
 # define BUF a->buf_str[a->buf_i]
 # define SCL v->scale
@@ -87,17 +89,6 @@ typedef struct	s_img_data
 }				t_img_data;
 
 /*
-** Current dot params: a, b
-*/
-
-typedef struct	s_pix_prm
-{
-	int				x;
-	int				y;
-	int				color;
-}				t_pix_prm;
-
-/*
 ** Mouse params: mouse
 */
 
@@ -152,6 +143,7 @@ struct			s_view_prms
 	int				height;
 	int				z_min;
 	int				z_max;
+	int				z_delta;
 	int				clr_prm;
 	int				help_rpm;
 	t_img_data		*img;
@@ -185,6 +177,18 @@ typedef struct	s_coord_map
 	double			y_crd;
 	double			z_crd;
 }				t_coord_map;
+
+
+/*
+** Current dot params: a, b
+*/
+
+typedef struct	s_pix_prm
+{
+	int				x;
+	int				y;
+	int				color;
+}				t_pix_prm;
 
 /*
 ** Operational draw image params: draw
@@ -295,7 +299,11 @@ void			map_rotation(int key, t_mlx_prms	*x);
 void			get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd);
 void			get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	t_coord_map *i);
-void			set_gard_color(t_grad *g, t_grad_prms *clr, int pos);
+void			set_grad_color(t_grad *g, t_grad_prms *clr, int pos);
 void			set_scale(t_mlx_prms *x, t_view_prms *v);
 void			set_z_limits(t_mlx_prms *x, t_view_prms *v);
+void			set_high_color(t_mlx_prms *mlx, t_draw_image *draw, int prm);
+int				get_grad_color(t_img_data *img, t_grad_prms *clr, int pos);
+void			change_background(int key, t_mlx_prms *x);
+int				set_max_dim(int a, int b, int c);
 #endif
