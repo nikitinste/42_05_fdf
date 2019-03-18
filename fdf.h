@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 18:20:36 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 18:54:01 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,4 +311,5 @@ void			change_background(int key, t_mlx_prms *x);
 int				set_max_dim(int a, int b, int c);
 void			check_far_param(t_mlx_prms *mlx, t_coords *crd, \
 	t_draw_image *draw, int prm);
+void			set_alpha(t_mlx_prms *mlx, int *color, int alpha);
 #endif
