@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 20:08:08 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 15:28:32 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 17:34:41 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,17 @@ void	set_z_limits(t_mlx_prms *mlx, t_view_prms *v)
 void	set_high_color(t_mlx_prms *mlx, t_draw_image *draw, int prm)
 {
 	t_grad_prms	clr;
+	int			a_pos;
+	int			b_pos;
 
 	clr.a = LOWCLR;
 	clr.b = HICLR;
 	clr.delta = mlx->v->z_delta;
-	draw->a.color = get_grad_color(mlx->img, &clr, mlx->map[0][draw->x][draw->y]);
+	a_pos = mlx->map[0][draw->x][draw->y] - mlx->v->z_min;
 	if (prm == 1)
-		draw->b.color = get_grad_color(mlx->img, &clr, mlx->map[0][draw->x + 1][draw->y]);
+		b_pos = mlx->map[0][draw->x + 1][draw->y] - mlx->v->z_min;
 	if (prm == 0)
-		draw->b.color = get_grad_color(mlx->img, &clr, mlx->map[0][draw->x][draw->y + 1]);
+		b_pos = mlx->map[0][draw->x][draw->y + 1] - mlx->v->z_min;
+	draw->a.color = get_grad_color(mlx->img, &clr, a_pos);
+	draw->b.color = get_grad_color(mlx->img, &clr, b_pos);
 }
