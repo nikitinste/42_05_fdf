@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 20:08:08 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 17:34:41 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 18:40:23 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	crd->x[i->x][i->y] = v->x + i->x_crd;
 	crd->y[i->x][i->y] = v->y + i->y_crd;
 	if (mlx->img->far_prm == 1)
+	{
 		crd->far[i->x][i->y] = i->z_crd;
+		if (i->z_crd > v->far_max)
+			v->far_max = i->z_crd;
+		if (i->z_crd < v->far_min)
+			v->far_min = i->z_crd;
+	}
 }
 
 void	set_z_limits(t_mlx_prms *mlx, t_view_prms *v)
@@ -80,4 +86,24 @@ void	set_high_color(t_mlx_prms *mlx, t_draw_image *draw, int prm)
 		b_pos = mlx->map[0][draw->x][draw->y + 1] - mlx->v->z_min;
 	draw->a.color = get_grad_color(mlx->img, &clr, a_pos);
 	draw->b.color = get_grad_color(mlx->img, &clr, b_pos);
+}
+
+void	check_far_param(t_mlx_prms *mlx, t_coords *crd, t_draw_image *draw, \
+	int prm)
+{
+	int			alpha;
+	int			a_pos;
+	int			b_pos;
+
+	if (mlx->img->far_prm == 0)
+		return ;
+	a_pos = crd->far[draw->x][draw->y] - mlx->v->far_min;
+	if (prm == 1)
+		b_pos = crd->far[draw->x + 1][draw->y] - mlx->v->far_min;
+	if (prm == 0)
+		b_pos = crd->far[draw->x][draw->y + 1] - mlx->v->far_min;
+	alpha = (a_pos * 200) / mlx->v->far_delta;
+	set_alpha(mlx, &(draw->a.color), alpha);
+	alpha = (b_pos * 200) / mlx->v->far_delta;
+	set_alpha(mlx, &(draw->b.color), alpha);
 }

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 16:31:35 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 18:20:36 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ struct			s_view_prms
 	int				z_min;
 	int				z_max;
 	int				z_delta;
+	int				far_min;
+	int				far_max;
+	int				far_delta;
 	int				clr_prm;
 	int				help_rpm;
 	t_img_data		*img;
@@ -306,4 +309,6 @@ void			set_high_color(t_mlx_prms *mlx, t_draw_image *draw, int prm);
 int				get_grad_color(t_img_data *img, t_grad_prms *clr, int pos);
 void			change_background(int key, t_mlx_prms *x);
 int				set_max_dim(int a, int b, int c);
+void			check_far_param(t_mlx_prms *mlx, t_coords *crd, \
+	t_draw_image *draw, int prm);
 #endif

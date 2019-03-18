@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 15:59:06 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/18 18:19:50 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 	t_coord_map	i;
 
 	i.x = 0;
+	v->far_min = 0;
+	v->far_max = 0;
 	if (v->proj == 0)
 	{
 		while (i.x < mlx->m->x)
@@ -32,6 +34,7 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 	}
 	else
 		get_persp_cood(mlx, v, crd);
+	v->far_delta = v->far_max - v->far_min;
 }
 
 static void	set_hor_line(t_mlx_prms *mlx, t_coords *crd, t_draw_image *draw)
@@ -60,6 +63,7 @@ static void	set_hor_line(t_mlx_prms *mlx, t_coords *crd, t_draw_image *draw)
 	}
 	if (mlx->v->clr_prm == 1)
 		set_high_color(mlx, draw, 0);
+	check_far_param(mlx, crd, draw, 0);
 }
 
 static void	set_vert_line(t_mlx_prms *mlx, t_coords *crd, t_draw_image *draw)
@@ -88,6 +92,7 @@ static void	set_vert_line(t_mlx_prms *mlx, t_coords *crd, t_draw_image *draw)
 	}
 	if (mlx->v->clr_prm == 1)
 		set_high_color(mlx, draw, 1);
+	check_far_param(mlx, crd, draw, 1);
 }
 
 static void	get_lines(t_mlx_prms *mlx, t_coords *crd, t_draw_image *draw)
