@@ -6,16 +6,22 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 20:08:08 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 19:07:09 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/19 15:23:10 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
+void	get_persp_cood(t_view_prms *v, t_coords *crd, t_coord_map *i)
 {
-	if (mlx && v && crd)
-		return ;
+	/*if (mlx && v && crd)
+		return ;*/
+	double	alpha;
+
+	alpha = atan((double)i->x_crd / (double)(v->far - crd->far[i->x][i->y]));
+	i->x_crd = (int)(v->far * tan(alpha));
+	alpha = atan((double)i->y_crd / (double)(v->far - crd->far[i->x][i->y]));
+	i->y_crd = (int)(v->far * tan(alpha));
 }
 
 void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
@@ -34,16 +40,16 @@ void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	i->z_cr = i->z_crd;
 	i->x_crd = i->x_cr * cos(OY) - i->z_cr * sin(OY);
 	i->z_crd = i->x_cr * sin(OY) + i->z_cr * cos(OY);
+	if (v->proj == 1 || mlx->img->far_prm == 1)
+		crd->far[i->x][i->y] = i->z_crd;
+	if (mlx->img->far_prm == 1 && i->z_crd < v->far_max)
+		v->far_max = i->z_crd;
+	if (mlx->img->far_prm == 1 && i->z_crd > v->far_min)
+		v->far_min = i->z_crd;
+	if (v->proj == 1)
+		get_persp_cood(v, crd, i);
 	crd->x[i->x][i->y] = v->x + i->x_crd;
 	crd->y[i->x][i->y] = v->y + i->y_crd;
-	if (mlx->img->far_prm == 1)
-	{
-		crd->far[i->x][i->y] = i->z_crd;
-		if (i->z_crd < v->far_max)
-			v->far_max = i->z_crd;
-		if (i->z_crd > v->far_min)
-			v->far_min = i->z_crd;
-	}
 }
 
 void	set_z_limits(t_mlx_prms *mlx, t_view_prms *v)

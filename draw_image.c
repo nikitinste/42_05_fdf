@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 18:19:50 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/19 15:08:32 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,16 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 	i.x = 0;
 	v->far_min = 0;
 	v->far_max = 0;
-	if (v->proj == 0)
+	while (i.x < mlx->m->x)
 	{
-		while (i.x < mlx->m->x)
+		i.y = 0;
+		while (i.y < mlx->m->y)
 		{
-			i.y = 0;
-			while (i.y < mlx->m->y)
-			{
-				get_magic(mlx, v, crd, &i);
-				i.y++;
-			}
-			i.x++;
+			get_magic(mlx, v, crd, &i);			
+			i.y++;
 		}
+		i.x++;
 	}
-	else
-		get_persp_cood(mlx, v, crd);
 	v->far_delta = v->far_max - v->far_min;
 }
 
@@ -132,7 +127,7 @@ void		draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map,\
 		if (!get_new_map(mlx->m->x, mlx->m->y, &crd.x) \
 			|| !get_new_map(mlx->m->x, mlx->m->y, &crd.y))
 			exit(0);
-	if (mlx->img->far_prm == 1 && crd.far == NULL)
+	if ((mlx->img->far_prm == 1 || v->proj == 1) && crd.far == NULL)
 		if (!get_new_map(mlx->m->x, mlx->m->y, &crd.far))
 			exit(0);
 	crd.map = map;

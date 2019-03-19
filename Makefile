@@ -6,7 +6,7 @@
 #    By: uhand <uhand@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/31 19:43:18 by uhand             #+#    #+#              #
-#    Updated: 2019/03/18 16:35:13 by uhand            ###   ########.fr        #
+#    Updated: 2019/03/19 14:28:13 by uhand            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,15 +19,16 @@ handle_events_3.c draw_image_2.c line_builder_1.c aux_fnctns_3.c
 OBJ = fdf.o aux_fnctns.o window_control.o line_builder.o \
 line_builder_2.o handle_events.o draw_image.o aux_fnctns_2.o handle_events_2.o \
 handle_events_3.o draw_image_2.o line_builder_1.o aux_fnctns_3.o
-FLAGS = -Wall -Wextra -Werror -g -m64 -Ofast -flto -march=native -funroll-loops #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g -m64 -Ofast -flto -march=native -funroll-loops -fsanitize=address
 LIB = -L libft -lft
 LIBPATH = ./libft
+
 MLIBX = -L  minilibx -lmlx -framework OpenGL -framework AppKit
 MLIBXPATH = ./minilibx
 
 all: $(NAME)
 
-$(NAME): $(OBJ) Makefile
+$(NAME): $(OBJ)
 	@make -C $(LIBPATH)
 	@make -C $(MLIBXPATH)
 	gcc $(FLAGS) $(OBJ) -o $(NAME) $(LIB) $(MLIBX)

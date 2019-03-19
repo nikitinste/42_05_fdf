@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 18:54:01 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/19 14:19:22 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,7 +299,7 @@ void			bump_down(double *angle, int *i, int a);
 void			left_iso(int key, t_mlx_prms	*x);
 void			top_front(int key, t_mlx_prms	*x);
 void			map_rotation(int key, t_mlx_prms	*x);
-void			get_persp_cood(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd);
+void			get_persp_cood(t_view_prms *v, t_coords *crd, t_coord_map *i);
 void			get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	t_coord_map *i);
 void			set_grad_color(t_grad *g, t_grad_prms *clr, int pos);
