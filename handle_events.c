@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 19:13:32 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/19 16:50:18 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,15 @@
 static void	change_params(int key, t_mlx_prms *x)
 {
 	if (key == 4)
-	{
-		if (x->v->help_rpm == 1)
-			x->v->help_rpm = 0;
-		else
-			x->v->help_rpm = 1;
-	}
+		switch_params(&(x->v->help_rpm));
+	if (key == 18)
+		switch_params(&(x->img->woo_prm));
 	if (key == 19)
-	{
-		if (x->v->clr_prm == 0)
-			x->v->clr_prm = 1;
-		else
-			x->v->clr_prm = 0;
-	}
+		switch_params(&(x->v->clr_prm));
 	if (key == 20)
-	{
-		if (x->img->far_prm == 0)
-			x->img->far_prm = 1;
-		else
-			x->img->far_prm = 0;
-	}
+		switch_params(&(x->img->far_prm));
+	if (key == 21)
+		switch_params(&(x->v->proj));
 	if (key == 43 || key == 47)
 		change_background(key, x);
 }
@@ -115,14 +104,7 @@ int			deal_key(int key, void *prm)
 	if (key == 6 || key == 0 || key == 125 || key == 126 || key == 123 || \
 		key == 124 || key == 17 || key == 3 || key == 37 || key == 34)
 		map_rotation(key, x);
-	if (key == 18)
-	{
-		if (x->img->woo_prm == 0)
-			x->img->woo_prm = 1;
-		else
-			x->img->woo_prm = 0;
-	}
-	if (key == 4 || key == 43 || key == 47 || key == 19 || key == 20)
+	if (key == 4 || key == 43 || key == 47 || (key >= 18 && key <= 21))
 		change_params(key, x);
 	if (key == 29)
 		mouse_scale(key, x);

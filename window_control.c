@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/19 15:10:25 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/19 16:52:39 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	set_first(t_mlx_prms *x, t_img_data *img, t_view_prms *v)
 {
 	img->b_clr = BCLR;
 	img->woo_prm = 1;
-	img->far_prm = 1;
+	img->far_prm = 0;
 	x->v = v;
-	v->proj = 1;
+	v->proj = 0;
 	v->x_ang = 0;
 	v->y_ang = 0;
 	v->z_ang = 0;
