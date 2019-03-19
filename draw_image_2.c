@@ -6,25 +6,32 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 20:08:08 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/19 15:23:10 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/19 19:08:30 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_persp_cood(t_view_prms *v, t_coords *crd, t_coord_map *i)
+static	int	get_persp_cood(t_view_prms *v, t_coords *crd, t_coord_map *i)
 {
-	/*if (mlx && v && crd)
-		return ;*/
-	double	alpha;
+	double		x_alpha;
+	double		y_alpha;
+	int			x_prev;
+	int			y_prev;
 
-	alpha = atan((double)i->x_crd / (double)(v->far - crd->far[i->x][i->y]));
-	i->x_crd = (int)(v->far * tan(alpha));
-	alpha = atan((double)i->y_crd / (double)(v->far - crd->far[i->x][i->y]));
-	i->y_crd = (int)(v->far * tan(alpha));
+	x_prev = i->x_crd;
+	y_prev = i->y_crd;
+	x_alpha = atan((double)i->x_crd / (double)(v->far - crd->far[i->x][i->y]));
+	y_alpha = atan((double)i->y_crd / (double)(v->far - crd->far[i->x][i->y]));
+	i->x_crd = (int)(v->far * tan(x_alpha));
+	i->y_crd = (int)(v->far * tan(y_alpha));
+	if (((i->x_crd > 0 && x_prev < 0) || (i->x_crd < 0 && x_prev > 0)) || \
+		((i->y_crd > 0 && y_prev < 0) || (i->y_crd < 0 && y_prev > 0)))
+		return (0);
+	return (1);
 }
 
-void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
+int			get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	t_coord_map *i)
 {
 	i->x_cr = (i->y * SCL) - (((mlx->m->y - 1) * SCL) / 2);
@@ -47,12 +54,14 @@ void	get_magic(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd, \
 	if (mlx->img->far_prm == 1 && i->z_crd > v->far_min)
 		v->far_min = i->z_crd;
 	if (v->proj == 1)
-		get_persp_cood(v, crd, i);
+		if (!get_persp_cood(v, crd, i))
+			return (0);
 	crd->x[i->x][i->y] = v->x + i->x_crd;
 	crd->y[i->x][i->y] = v->y + i->y_crd;
+	return (1);
 }
 
-void	set_z_limits(t_mlx_prms *mlx, t_view_prms *v)
+void		set_z_limits(t_mlx_prms *mlx, t_view_prms *v)
 {
 	int		x;
 	int		y;
@@ -76,7 +85,7 @@ void	set_z_limits(t_mlx_prms *mlx, t_view_prms *v)
 	v->z_delta = v->z_max - v->z_min;
 }
 
-void	set_high_color(t_mlx_prms *mlx, t_draw_image *draw, int prm)
+void		set_high_color(t_mlx_prms *mlx, t_draw_image *draw, int prm)
 {
 	t_grad_prms	clr;
 	int			a_pos;
@@ -94,8 +103,8 @@ void	set_high_color(t_mlx_prms *mlx, t_draw_image *draw, int prm)
 	draw->b.color = get_grad_color(mlx->img, &clr, b_pos);
 }
 
-void	check_far_param(t_mlx_prms *mlx, t_coords *crd, t_draw_image *draw, \
-	int prm)
+void		check_far_param(t_mlx_prms *mlx, t_coords *crd, \
+	t_draw_image *draw, int prm)
 {
 	int			alpha;
 	int			a_pos;

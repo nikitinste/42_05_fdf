@@ -6,13 +6,13 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/19 15:08:32 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/19 19:03:26 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
+static int	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 {
 	t_coord_map	i;
 
@@ -24,12 +24,14 @@ static void	get_coord_map(t_mlx_prms *mlx, t_view_prms *v, t_coords *crd)
 		i.y = 0;
 		while (i.y < mlx->m->y)
 		{
-			get_magic(mlx, v, crd, &i);			
+			if (!get_magic(mlx, v, crd, &i))
+				return (0);
 			i.y++;
 		}
 		i.x++;
 	}
 	v->far_delta = v->far_max - v->far_min;
+	return (1);
 }
 
 static void	set_hor_line(t_mlx_prms *mlx, t_coords *crd, t_draw_image *draw)
@@ -132,6 +134,11 @@ void		draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map,\
 			exit(0);
 	crd.map = map;
 	crd.color = color;
-	get_coord_map(mlx, v, &crd);
+	if (!get_coord_map(mlx, v, &crd))
+	{
+		mouse_scale(4, mlx);
+		draw_image(mlx, v, map, color);
+		return ;
+	}
 	get_lines(mlx, &crd, &draw);
 }

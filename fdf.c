@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:57 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 17:55:27 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/19 19:29:32 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ static int	make_color(t_make_arr *a, int ***color, int ***map)
 	static int	call;
 	char		*start;
 
+	start = ft_strstr(BUF, ",0x");
+	start += 3;
+	if (!((*start >= '0' && *start <= '9') || (*start >= 'A' && *start <= 'F') \
+		|| (*start >= 'a' && *start <= 'f')))
+		return (0);
 	if (call == 0)
 	{
 		if (!get_zeromap(a, color))
 			return (free_arr(map, color, a, -1));
 		call = 1;
 	}
-	start = ft_strchr(BUF, 'x');
-	start++;
-	if (!((*start >= '0' && *start <= '9') || (*start >= 'A' && *start <= 'F') \
-		|| (*start >= 'a' && *start <= 'f')))
-		return (0);
 	color[0][a->row_i][a->buf_i] = get_color(start);
 	return (1);
 }
@@ -44,7 +44,7 @@ static int	get_row(t_list *list, t_make_arr *a, int ***map, int ***color)
 	a->buf_i = 0;
 	while (BUF)
 	{
-		if (ft_strchr(BUF, ',') || ft_strchr(BUF, 'x'))
+		if (ft_strstr(BUF, ",0x"))
 			if (!make_color(a, color, map))
 				return (0);
 		z = ft_atoi(a->buf_str[a->buf_i]);
