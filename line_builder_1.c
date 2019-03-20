@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 13:43:52 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 14:30:30 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/20 20:55:44 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,21 @@ void	set_grad_color(t_grad *g, t_grad_prms *clr, int pos)
 	g->c[g->start + 1] = ((g->d2 * pos) / clr->delta) + g->a[g->start + 1];
 	g->c[g->start + 2] = ((g->d3 * pos) / clr->delta) + g->a[g->start + 2];
 	g->c[g->alpha] = ((g->d_alpha * pos) / clr->delta) + g->a[g->alpha];
+}
+
+void	persp_coord_recursive(t_mlx_prms *mlx, int *rec_counter)
+{
+	if (*rec_counter == 0)
+	{
+		*rec_counter = *rec_counter + 1;
+		mouse_scale(4, mlx);
+		draw_image(mlx, mlx->v, mlx->map, mlx->color);
+		return ;
+	}
+	if (*rec_counter == 1)
+	{
+		*rec_counter = *rec_counter - 1;
+		mlx->v->proj = 0;
+		draw_image(mlx, mlx->v, mlx->map, mlx->color);
+	}
 }

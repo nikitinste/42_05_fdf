@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:21:01 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/19 19:03:26 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/20 20:56:31 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,22 +123,25 @@ void		draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map,\
 	int ***color)
 {
 	static t_coords	crd;
+	static int		rec_counter;
 	t_draw_image	draw;
 
 	if (crd.x == NULL)
+	{
 		if (!get_new_map(mlx->m->x, mlx->m->y, &crd.x) \
 			|| !get_new_map(mlx->m->x, mlx->m->y, &crd.y))
-			exit(0);
+			close_fdf((void*)mlx);
+		mlx->crd = &crd;
+		crd.far = NULL;
+	}
 	if ((mlx->img->far_prm == 1 || v->proj == 1) && crd.far == NULL)
 		if (!get_new_map(mlx->m->x, mlx->m->y, &crd.far))
-			exit(0);
+			close_fdf((void*)mlx);
 	crd.map = map;
 	crd.color = color;
 	if (!get_coord_map(mlx, v, &crd))
-	{
-		mouse_scale(4, mlx);
-		draw_image(mlx, v, map, color);
-		return ;
-	}
+		persp_coord_recursive(mlx, &rec_counter);
+	else
+		rec_counter = 0;
 	get_lines(mlx, &crd, &draw);
 }

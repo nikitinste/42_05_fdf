@@ -6,18 +6,19 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 19:30:06 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/19 16:21:47 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/20 14:32:38 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		close_window(void *prm)
+int		close_fdf(void *prm)
 {
 	t_mlx_prms	*x;
 
 	x = (t_mlx_prms*)prm;
 	mlx_destroy_window(x->mlx_ptr, x->win_ptr);
+	free_all_maps(x);
 	exit(0);
 	return (0);
 }
@@ -38,7 +39,7 @@ void	renew_window(t_mlx_prms *mlx)
 				isometric | 0 - reset scale");
 		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 5, (mlx->win->y - 65), \
 			mlx->v->line_clr, "1 - off/on antialiasing | Asix rotation: \
-				left-right/up-down/A-Z Z/Y/X");
+				up-down/left-right/A-D X/Y/Z");
 		mlx_string_put(mlx->mlx_ptr, mlx->win_ptr, 5, (mlx->win->y - 45), \
 			mlx->v->line_clr, "color modes: 2 - on/off altitude heatmap \
 				| 3 - on/off far effect mode");

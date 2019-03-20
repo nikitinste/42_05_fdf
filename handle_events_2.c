@@ -6,11 +6,20 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 19:41:03 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 15:39:20 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/20 13:06:28 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	change_cam(int key, t_mlx_prms *x)
+{
+	return ;
+	if (key == 13)
+		x->v->far -= 5;
+	if (key == 1)
+		x->v->far += 5;
+}
 
 int		mouse_scroll(t_mlx_prms *mlx, t_mouse_crd *scroll, int x, int y)
 {

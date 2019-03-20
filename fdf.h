@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 19:42:45 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/19 18:49:16 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/20 20:54:33 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define OZ mlx->v->z_ang
 
 typedef struct s_view_prms	t_view_prms;
+typedef struct s_coords		t_coords;
 
 /*
 ** Operational map array params: a
@@ -112,6 +113,7 @@ typedef struct	s_mlx_prms
 	t_img_data		*img;
 	t_map_prm		*m;
 	t_view_prms		*v;
+	t_coords		*crd;
 	t_mouse_crd		*scroll;
 	t_mouse_crd		*mouse;
 	int				***map;
@@ -127,10 +129,10 @@ typedef struct	s_mlx_prms
 
 struct			s_view_prms
 {
-	int				proj;
 	double			x_ang;
 	double			y_ang;
 	double			z_ang;
+	int				proj;
 	int				scale;
 	int				z_scl;
 	int				scl_max;
@@ -156,14 +158,14 @@ struct			s_view_prms
 ** Coords: crd
 */
 
-typedef struct	s_coords
+struct			s_coords
 {
 	int				**x;
 	int				**y;
 	int				**far;
 	int				***map;
 	int				***color;
-}				t_coords;
+};
 
 /*
 ** Window coords
@@ -282,7 +284,7 @@ int				deal_key(int key, void *prm);
 int				mouse_press(int key, int x, int y, void *prm);
 int				mouse_release(int key, int x, int y, void *prm);
 int				mouse_move(int x, int y, void *prm);
-int				close_window(void *param);
+int				close_fdf(void *param);
 void			draw_image(t_mlx_prms *mlx, t_view_prms *v, int ***map, \
 	int ***color);
 int				get_invers_clr(int color, int ndn);
@@ -311,4 +313,8 @@ void			check_far_param(t_mlx_prms *mlx, t_coords *crd, \
 	t_draw_image *draw, int prm);
 void			set_alpha(t_mlx_prms *mlx, int *color, int alpha);
 void			switch_params(int *param);
+void			change_cam(int key, t_mlx_prms *x);
+void			free_map(int **map, int i);
+int				free_all_maps(t_mlx_prms *mlx);
+void			persp_coord_recursive(t_mlx_prms *mlx, int *rec_counter);
 #endif

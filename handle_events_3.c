@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/10 19:48:23 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/18 15:54:18 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/20 11:25:35 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,17 @@ void	top_front(int key, t_mlx_prms *x)
 
 void	map_rotation(int key, t_mlx_prms *x)
 {
-	if (key == 6)
-		bump_up(&(x->v->x_ang), &(x->x_i), 5);
-	if (key == 0)
-		bump_down(&(x->v->x_ang), &(x->x_i), 5);
 	if (key == 125)
-		bump_up(&(x->v->y_ang), &(x->y_i), 5);
+		bump_up(&(x->v->x_ang), &(x->x_i), 5);
 	if (key == 126)
-		bump_down(&(x->v->y_ang), &(x->y_i), 5);
-	if (key == 124)
-		bump_up(&(x->v->z_ang), &(x->z_i), 5);
+		bump_down(&(x->v->x_ang), &(x->x_i), 5);
 	if (key == 123)
+		bump_up(&(x->v->y_ang), &(x->y_i), 5);
+	if (key == 124)
+		bump_down(&(x->v->y_ang), &(x->y_i), 5);
+	if (key == 2)
+		bump_up(&(x->v->z_ang), &(x->z_i), 5);
+	if (key == 0)
 		bump_down(&(x->v->z_ang), &(x->z_i), 5);
 	if (key == 17 || key == 3)
 		top_front(key, x);

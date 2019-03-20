@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/19 16:50:18 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/20 13:04:38 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	change_params(int key, t_mlx_prms *x)
 		switch_params(&(x->v->proj));
 	if (key == 43 || key == 47)
 		change_background(key, x);
+	if ((key == 1 || key == 13) && x->v->proj == 1)
+		change_cam(key, x);
 }
 
 int			mouse_move(int x, int y, void *prm)
@@ -101,10 +103,11 @@ int			deal_key(int key, void *prm)
 		mlx_destroy_window(x->mlx_ptr, x->win_ptr);
 		exit(0);
 	}
-	if (key == 6 || key == 0 || key == 125 || key == 126 || key == 123 || \
-		key == 124 || key == 17 || key == 3 || key == 37 || key == 34)
+	if (key == 0 || key == 2 || (key >= 123 && key <= 126) \
+		|| key == 17 || key == 3 || key == 37 || key == 34)
 		map_rotation(key, x);
-	if (key == 4 || key == 43 || key == 47 || (key >= 18 && key <= 21))
+	if (key == 4 || key == 43 || key == 47 || (key >= 18 && key <= 21) \
+		|| key == 1 || key == 13)
 		change_params(key, x);
 	if (key == 29)
 		mouse_scale(key, x);

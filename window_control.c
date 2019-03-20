@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 18:34:00 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/19 16:52:39 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/20 14:32:45 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int			window_control(int ***map, int ***color, t_map_prm m, char *name)
 	set_img_param(&x, &img, &v);
 	renew_window(&x);
 	mlx_hook(x.win_ptr, 2, 0, &deal_key, (void*)&x);
-	mlx_hook(x.win_ptr, 17, 0, &close_window, (void*)&x);
+	mlx_hook(x.win_ptr, 17, 0, &close_fdf, (void*)&x);
 	mlx_hook(x.win_ptr, 4, 0, &mouse_press, (void*)&x);
 	mlx_hook(x.win_ptr, 5, 0, &mouse_release, (void*)&x);
 	mlx_hook(x.win_ptr, 6, 0, &mouse_move, (void*)&x);

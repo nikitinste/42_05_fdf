@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 16:55:10 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/17 17:55:17 by uhand            ###   ########.fr       */
+/*   Updated: 2019/03/20 15:11:42 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,8 @@ int		free_arr(int ***map, int ***color, t_make_arr *a, int err)
 	}
 	if (err == -1)
 	{
-		while (a->row_i >= 0)
-		{
-			if (map[0][a->row_i])
-				free(map[0][a->row_i]);
-			if (color[0] != NULL)
-				if (color[0][a->row_i])
-					free(color[0][a->row_i]);
-			a->row_i--;
-		}
-		free(map[0]);
-		if (color[0] != NULL)
-			free(color[0]);
+		free_map(map[0], a->row_count);
+		free_map(color[0], a->row_count);
 	}
 	return (0);
 }
