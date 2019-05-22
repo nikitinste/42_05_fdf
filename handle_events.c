@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 18:10:38 by uhand             #+#    #+#             */
-/*   Updated: 2019/03/20 13:04:38 by uhand            ###   ########.fr       */
+/*   Updated: 2019/05/22 17:07:22 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,7 @@ int			deal_key(int key, void *prm)
 
 	x = (t_mlx_prms*)prm;
 	if (key == 53)
-	{
-		mlx_destroy_window(x->mlx_ptr, x->win_ptr);
-		exit(0);
-	}
+		return (close_fdf(prm));
 	if (key == 0 || key == 2 || (key >= 123 && key <= 126) \
 		|| key == 17 || key == 3 || key == 37 || key == 34)
 		map_rotation(key, x);
